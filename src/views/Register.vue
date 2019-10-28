@@ -1,7 +1,7 @@
 <!-- template -->
 <template>
     <div class="register">
-      <h1>我是注册页面</h1> 
+      <h1> 我是注册页面 </h1> 
     </div>
 </template>
 

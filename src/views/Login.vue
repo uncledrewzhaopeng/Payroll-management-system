@@ -2,6 +2,7 @@
 <template>
     <div class="login">
         <div class="ms-login">
+            <div class="ms-logo"><img src="../assets/img/logo.png" alt=""></div>
             <div class="ms-title">交流分享技术性论坛</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
@@ -88,6 +89,14 @@
         height: 100%;
         background: url("../assets/img/loginbg.jpg");
         background-size: 100%;
+    }
+
+    .ms-logo {
+        margin-top:20px;
+    img{
+        width: 25%;
+        height: 10%;
+        }
     }
 
     .ms-title {

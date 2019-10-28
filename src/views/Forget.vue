@@ -1,7 +1,7 @@
 <!-- template -->
 <template>
     <div class="forget">
-        <h1>  我是忘记密码页面 </h1>
+        <h1> 我是忘记密码页面 </h1>
         
     </div>
 </template>
