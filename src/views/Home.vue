@@ -6,6 +6,7 @@
         <el-header>头部</el-header>
         <el-main>
           <!-- 所有页面都在main里展示，共用侧边栏和头部 -->
+          所有页面都在main里展示，共用侧边栏和头部
           <router-view></router-view>
         </el-main>
       </el-container>
