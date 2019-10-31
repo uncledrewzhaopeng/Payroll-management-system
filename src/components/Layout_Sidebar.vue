@@ -7,14 +7,14 @@
         <!-- router：是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 -->
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#ffffff"
             active-text-color="#20a0ff" unique-opened router>
-            <el-menu-item >
+            <el-menu-item class="delbg">
                 <div class="sidebar-imgdiv">
                     <img class="sidebar-img01" src="../assets/img/logo1.png" alt />
                     <span slot="title"><img class="sidebar-img02" src="../assets/img/logo2.png" alt /></span>
                 </div>
             </el-menu-item>
 
-            <el-menu-item >
+            <el-menu-item class="delbg">
                 <span slot="title">
                     <div class="headertitle">薪资管理系统</div>
                 </span>
@@ -25,6 +25,7 @@
                     <el-menu-item class="sidebar-item" :index="item.index" :key="item.index">
                         <img class="sidebar-item-img" :src="item.imgurl" alt="">
                         <span slot="title">{{item.title}}</span>
+
                     </el-menu-item>
                 </template>
             </template>
@@ -83,14 +84,24 @@
 </script>
 
 <style scoped lang="less">
+    .delbg {
+        background: white !important;
+
+        &:hover {
+            background: white !important;
+        }
+    }
+
     .sidebar-item {
         display: block;
         width: 100%;
         border-left: 5px solid white;
         box-sizing: border-box;
+        color: blue;
 
         &:hover {
             border-left: 5px solid blue;
+            background: #f1f5fd !important;
         }
 
         span {
@@ -99,12 +110,16 @@
         }
     }
 
-    .el-menu-item {
-        color: blue;
+    // 激活菜单项实现动态更换背景色
+    .el-menu-item.is-active {
+        color: #6681FA;
+        background-color: #EAEEFF !important;
+        border-left: 5px solid blue;
     }
 
     .sidebar-imgdiv {
         margin-top: 34px;
+
         .sidebar-img01 {
             width: 42px;
             height: 42px;
@@ -119,11 +134,12 @@
         }
 
     }
-  .headertitle {
-      position: absolute;
-      left:26px;
-      margin-top: 20px;
-      color: black;
+
+    .headertitle {
+        position: absolute;
+        left: 26px;
+        margin-top: 20px;
+        color: black;
         font-size: 22px;
     }
 

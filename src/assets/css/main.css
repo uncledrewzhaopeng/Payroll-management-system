@@ -19,6 +19,7 @@ body {
 a {
     text-decoration: none
 }
+
 .content-box {
     position: absolute;
     left: 250px;
@@ -28,23 +29,27 @@ a {
     padding-bottom: 30px;
     -webkit-transition: left .3s ease-in-out;
     transition: left .3s ease-in-out;
-    background: #f0f0f0;
+    background: #f1f5fd;
 }
+
 .content {
     position: absolute;
-    top:30px;
+    top: 30px;
     width: 100%;
     height: 100%;
     padding: 10px;
     overflow-y: scroll;
     box-sizing: border-box;
 }
+
 .content-collapse {
     left: 65px;
 }
+
 .crumbs {
     margin: 10px 0;
 }
+
 .container {
     padding: 30px;
     background: #fff;

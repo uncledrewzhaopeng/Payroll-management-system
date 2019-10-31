@@ -49,7 +49,10 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: () => import( /* webpackChunkName: "forget" */ '../views/Login.vue')
+        component: () => import( /* webpackChunkName: "forget" */ '../views/Login.vue'),
+        meta: {
+            title: '登录页'
+        }
     }
 ]
 const router = new VueRouter({

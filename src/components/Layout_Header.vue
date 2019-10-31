@@ -18,7 +18,10 @@
                         <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
+
+                        <el-dropdown-item icon="el-icon-s-tools" command="setting">系统设置</el-dropdown-item>
+
+                        <el-dropdown-item icon="el-icon-caret-right" divided command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -65,6 +68,9 @@
                     localStorage.removeItem("username");
                     this.$router.push("/login");
                 }
+                 if (command == "setting") {
+                    this.$router.push("/setting");
+                }
             }
         }
     };
@@ -84,8 +90,8 @@
         font-size: 22px;
         color: #fff;
         line-height: 70px;
-       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.349019607843137);
-       z-index: 2;
+        box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.349019607843137);
+        z-index: 2;
 
         // 折叠按钮
         .collapse-btn {

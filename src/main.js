@@ -7,7 +7,10 @@ import axios from './http'
 // 引入ElementUI
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUI);
+Vue.use(ElementUI,{ size: 'small'});
+
+// 引入阿里巴巴图标,小心坑哦   要放在element-ui的后面
+import "./assets/css/icon.css"
 
 Vue.config.productionTip = false
 
