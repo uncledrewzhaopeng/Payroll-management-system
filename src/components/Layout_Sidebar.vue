@@ -61,7 +61,7 @@
                     },
                     {
                         imgurl: require("../assets/img/sidebarimg/shezhi.png"),
-                        index: "shezhi",
+                        index: "setting",
                         title: "系统设置",
                     },
                 ]

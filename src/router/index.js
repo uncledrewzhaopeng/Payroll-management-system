@@ -33,12 +33,7 @@ const routes = [
                 meta: {
                     title: '设置页面'
                 }
-            },
-            {
-                meta: '设置页面',
-
-                component: Setting,
-            },
+            }
         ]
     },
     {
