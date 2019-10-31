@@ -83,10 +83,9 @@
     };
 </script>
 
-<style scoped lang="less">
-    .delbg {
-        background: white !important;
-
+<style  lang="less">
+    .delbg { 
+        background: white !important ;
         &:hover {
             background: white !important;
         }
