@@ -35,14 +35,13 @@ const routes = [{
 
             },
             {
-                path: '/addadmin',
-                name: 'addadmin',
-                component: () => import( /* webpackChunkName: "setting" */ '../views/Addadmin.vue'),
-                meta: {
-                    title: '新增管理'
-                },
-
-            },
+              path: '/addadmin',
+              name: 'addadmin',
+              component: () => import( /* webpackChunkName: "setting" */ '../views/Addadmin.vue'),
+              meta: {
+                  title: '新增管理员'
+              },  
+          },
             {
                 path: '/attendance',
                 name: 'attendance',
