@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../components/Layout.vue'
 
-
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         redirect: '/indextest'
     },
@@ -14,18 +14,32 @@ const routes = [{
         name: 'layout',
         component: Layout,
         children: [{
-            path: '/indextest',
-            component: () => import( /* webpackChunkName: "user" */ '../views/IndexTest.vue'),
-            meta: {
-                title: '首页'
-            }
-        },{
-            path: '/user',
-            component: () => import( /* webpackChunkName: "user" */ '../views/User.vue'),
-            meta: {
-                title: '员工管理'
-            }
-        }]
+                path: '/indextest',
+                component: () => import( /* webpackChunkName: "user" */ '../views/IndexTest.vue'),
+                meta: {
+                    title: '首页'
+                }
+            }, {
+                path: '/user',
+                component: () => import( /* webpackChunkName: "user" */ '../views/User.vue'),
+                meta: {
+                    title: '员工管理'
+                }
+            },
+            {
+                path: '/setting',
+                name: 'setting',
+                component: () => import( /* webpackChunkName: "setting" */ '../views/Setting.vue'),
+                meta: {
+                    title: '设置页面'
+                }
+            },
+            {
+                meta: '设置页面',
+
+                component: Setting,
+            },
+        ]
     },
     {
         path: '/register',

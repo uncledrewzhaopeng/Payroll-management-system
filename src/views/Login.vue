@@ -18,7 +18,6 @@
                 </el-form-item>
                 <p class="forgetpass">
                     <a href="#" @click="forget()">忘记密码&ensp;？</a>
-
                 </p>
                 <div class="btn">
                     <el-button type="warning" @click="submitForm()">登录</el-button>
@@ -28,7 +27,6 @@
                 </div>
             </el-form>
         </div>
-
     </div>
 </template>
 
@@ -85,38 +83,55 @@
 <style lang="less" scoped>
     .login {
         position: relative;
-        width: 100%;
+        width: 50%;
         height: 100%;
         // background: url("../assets/img/loginbg.jpg");
         background-size: 100%;
     }
 
     .ms-logo {
-        margin-top:20px;
-    img{
-        width: 25%;
-        height: 10%;
+        margin-top: 20px;
+
+        img {
+            width: 25%;
+            height: 10%;
         }
     }
 
     .ms-title {
         width: 100%;
-        line-height: 50px;
+        line-height: 60px;
         text-align: center;
         font-size: 20px;
-        color: #fff;
+        color: black;
         border-bottom: 1px solid #ddd;
     }
 
     .ms-login {
+        border-width: 0px;
         position: absolute;
-        left: 48%;
-        top: 50%;
-        width: 25%;
-        margin: -190px 0 0 -175px;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.3);
-        overflow: hidden;
+        left: 650px;
+        top: 141px;
+        width: 300px;
+        height: 353px;
+        font-family: 'PingFang SC Medium', 'PingFang SC';
+        font-weight: 500;
+        font-style: normal;
+        font-size: 14px;
+        color: #FFFFFF;
+
+        .ms-login-div {
+            top: 0px;
+            width: 300px;
+            height: 353px;
+            background: inherit;
+            background-color: rgba(255, 255, 255, 1);
+            border: none;
+            border-radius: 6px;
+            -moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.349019607843137);
+            -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.349019607843137);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.349019607843137);
+        }
     }
 
     .ms-content {
@@ -125,6 +140,7 @@
 
     .btn {
         text-align: center;
+
         button {
             width: 100%;
             height: 36px;
@@ -132,14 +148,13 @@
         }
     }
 
-
-
     .forgetpass {
         font-size: 12px;
         line-height: 20px;
         float: right;
         margin-top: -10px;
         margin-bottom: 10px;
+
         a {
             color: #444;
 
