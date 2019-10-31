@@ -33,6 +33,14 @@ const routes = [
                 meta: {
                     title: '设置页面'
                 }
+            },
+            {
+                path: '/attendance',
+                name: 'attendance',
+                component: () => import( /* webpackChunkName: "attendance" */ '../views/Attendance.vue'),
+                meta: {
+                    title: '出勤统计'
+                }
             }
         ]
     },
