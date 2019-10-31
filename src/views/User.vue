@@ -39,9 +39,13 @@
                 </el-table-column>
                 <el-table-column prop="education" label="学历">
                 </el-table-column>
+
                 <el-table-column fixed="right" label="操作">
-                    <el-button type="text" icon="el-icon-edit" size="large">编辑</el-button>
-                    <el-button type="text" icon="el-icon-delete-solid" size="large" @click="del">删除</el-button>
+                    <template slot-scope="scope">
+                        <el-button type="text" icon="el-icon-edit" size="large">编辑</el-button>
+                        <el-button type="text" icon="el-icon-delete-solid" size="large"
+                            @click.native.prevent="deleteRow(scope.$index, tableData)">删除</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
             <el-row>
@@ -125,6 +129,9 @@
         },
         components: {},
         methods: {
+            deleteRow(index, rows) {
+                rows.splice(index, 1);
+            },
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
@@ -153,7 +160,7 @@
                     // 设置Excel的表格第一行的标题
                     const tHeader = ['姓名', '工号', '部门', '手机', "邮箱", "学历"];
                     // index、nickName、name是tableData里对象的属性
-                    const filterVal = ['name', 'number', 'branch','phone', 'email', 'education',];
+                    const filterVal = ['name', 'number', 'branch', 'phone', 'email', 'education', ];
                     //把data里的tableData存到list
                     const list = this.tableData;
                     const data = this.formatJson(filterVal, list);
@@ -170,8 +177,6 @@
 
 <!-- style -->
 <style lang="less">
-
-
     /*表格居中*/
     .el-table th,
     .el-table td {
@@ -207,9 +212,9 @@
         .btn {
             margin: 0px 30px 0px 30px;
             border-radius: 20px;
-            border-color: #b3d8ff;
-            background: #ecf5ff;
             color: #409EFF;
+            background: #ecf5ff;
+            border-color: #b3d8ff;
             font-size: 12px;
 
             &:hover {
