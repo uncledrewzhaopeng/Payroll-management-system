@@ -3,7 +3,7 @@
     <div class="login">
         <div class="ms-login">
             <!-- <div class="ms-logo"><img src="../assets/img/logo.png" alt=""></div> -->
-            <div class="ms-title">交流分享技术性论坛</div>
+            <div class="ms-title">新增管理系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
                     <el-input v-model="param.username" placeholder="username" clearable>
@@ -83,9 +83,9 @@
 <style lang="less" scoped>
     .login {
         position: relative;
-        width: 50%;
+        width: 100%;
         height: 100%;
-        // background: url("../assets/img/loginbg.jpg");
+        background: url("../assets/img/bg3.jpg");
         background-size: 100%;
     }
 
@@ -103,7 +103,7 @@
         line-height: 60px;
         text-align: center;
         font-size: 20px;
-        color: black;
+        color: #FFFFFF;
         border-bottom: 1px solid #ddd;
     }
 
