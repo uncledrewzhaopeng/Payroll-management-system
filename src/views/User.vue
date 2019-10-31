@@ -21,35 +21,37 @@
             </div>
         </div>
         <div class="container">
-            <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName"
-                @selection-change="handleSelectionChange">
-                <el-table-column type="selection" width="55">
-                </el-table-column>
+            <el-row :gutter="20" class="c-head">
+                <el-col :span="3">多选框</el-col>
+                <el-col :span="3">姓名</el-col>
+                <el-col :span="3">工号</el-col>
+                <el-col :span="3">部门</el-col>
+                <el-col :span="3">手机</el-col>
+                <el-col :span="3">邮箱</el-col>
+                <el-col :span="3">学历</el-col>
+                <el-col :span="3">操作</el-col>
+            </el-row>
 
-                <el-table-column prop="name" label="姓名">
-                </el-table-column>
-                <el-table-column prop="number" label="工号">
-                </el-table-column>
-                <el-table-column prop="branch" label="部门">
-                </el-table-column>
-                <el-table-column prop="phone" label="手机">
-                </el-table-column>
-                <el-table-column prop="email" label="邮箱">
-                </el-table-column>
-                <el-table-column prop="edu" label="学历">
-                </el-table-column>
-                <el-table-column label="操作">
-                    <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                        <el-button type="text" size="small">编辑</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div style="text-align: center;margin-top: 30px;">
-                <el-pagination background layout="prev, pager, next" :total="total" @current-change="current_change">
+            <el-row :gutter="20" class="c-item" v-for="(item, i) in arr" :key="i">
+                <el-col :span="3"><el-checkbox/></el-col>
+                <el-col :span="3">李明</el-col>
+                <el-col :span="3">20180609001</el-col>
+                <el-col :span="3">技术部</el-col>
+                <el-col :span="3">18854138756
+                </el-col>
+                <el-col :span="3">18854138756@163.com</el-col>
+                <el-col :span="3">本科</el-col>
+                <el-col :span="3">
+                    <el-button type="text" icon="el-icon-edit" size="large">编辑</el-button>
+                    <el-button type="text" icon="el-icon-delete-solid" size="large" @click="del">删除</el-button>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-pagination v-if="total > 0" @current-change="changePage" :current-page="currentPage"
+                    :page-size="pageSize" :total="total" :pager-count="5" layout="total, prev, pager, next"
+                    style="float:right; margin: 25px 0 0;">
                 </el-pagination>
-            </div>
-
+            </el-row>
         </div>
     </div>
 </template>
@@ -61,261 +63,19 @@
         data() {
             return {
                 input: "",
+                arr: [1, 2, 3, 4, 5, 6, 7, 8],
                 total: 100,
-                pagesize: 10,
                 currentPage: 1,
-                tableData: [{
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }, {
-                    name: '王小虎',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: '18854138756',
-                    email: '18854138756@163.com',
-                    edu: "本科"
-                }]
+                pageSize: 20,
             }
         },
         components: {},
         methods: {
-            handleClick(row) {
-                console.log(row);
+            del(){
+                console.log(11111111111)
             },
-            tableRowClassName({
-                row,
-                rowIndex
-            }) {
-                if (rowIndex === 1) {
-                    return 'warning-row';
-                } else if (rowIndex === 3) {
-                    return 'success-row';
-                }
-                return '';
-            },
-            handleSelectionChange(val) {
-                this.multipleSelection = val;
+            changePage(val) {
+                console.log(val);
             }
         },
     }
@@ -323,31 +83,34 @@
 
 <!-- style -->
 <style lang="less">
-    .el-table {
-        height: 400px;
-        // overflow:scroll;
+    // 复制过来的代码
+    .c-head {
+        font-weight: bold;
+        color: #666;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eee;
+
+        .el-col {
+            border-right: 2px solid #ddd;
+
+            &:last-of-type {
+                border-right: none;
+            }
+        }
     }
 
-    // 表格字体居中
-    .el-table td,
-    .el-table th {
-        text-align: center !important;
+    .c-item {
+        padding: 12px 0;
+
+        .el-button {
+            padding: 0;
+        }
+
+        &:nth-of-type(2n + 1) {
+            background-color: #dae8fa;
+        }
     }
 
-    // 表格字体变大
-    .el-table--mini,
-    .el-table--small,
-    .el-table__expand-icon {
-        font-size: 14px;
-    }
-
-    .el-table .warning-row {
-        background: oldlace;
-    }
-
-    .el-table .success-row {
-        background: #f0f9eb;
-    }
 
     .usertool {
         display: flex;
@@ -355,21 +118,25 @@
         position: relative;
 
         .usertitle {
-            font-size: 24px;
-            margin-left: 30px;
+            font-weight: bold;
+            font-size: 22px;
+            margin-left: 10px;
             margin-right: 30px;
         }
 
         .btn {
             margin: 0px 30px 0px 30px;
-            border: 1px solid #2a65ef;
-            color: #2a65ef;
-            font-size: 16px;
+            border-radius: 20px;
+            border-color: #b3d8ff;
+            background: #ecf5ff;
+            color: #409EFF;
+            font-size: 12px;
 
             &:hover {
-                background: blue;
-                color: white;
-                font-size: 16px;
+                background: #409EFF;
+                border-color: #409EFF;
+                color: #FFF;
+                font-size: 12px;
             }
         }
 
@@ -377,20 +144,21 @@
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-            color: #2a65ef;
+            color: rgb(24, 46, 241);
             font-size: 30px;
             position: absolute;
             right: 0px;
         }
 
         .el-input__inner {
-            background: #f1f5fd;
-            border-radius: 0px;
+            border: none;
             width: 300px;
-            border-top-style: none;
-            border-left-style: none;
-            border-right-style: none;
-            border-bottom: 3px solid blue;
+            border-radius: 0px;
+            background: none;
+            font-size: 16px;
+            line-height: 24px;
+            border-bottom: 1px solid rgb(24, 46, 241);
+            margin-right: 25px;
 
             &::-webkit-input-placeholder {
                 /* WebKit browsers */
