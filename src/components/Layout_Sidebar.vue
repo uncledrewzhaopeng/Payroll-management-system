@@ -52,7 +52,7 @@
                     },
                     {
                         imgurl: require("../assets/img/sidebarimg/tongji.png"),
-                        index: "tongji",
+                        index: "attendance",
                         title: "出勤统计",
                     },
                     {
