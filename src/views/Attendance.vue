@@ -117,6 +117,9 @@ export default {
       line-height: 24px;
       border-bottom: 1px solid rgb(24, 46, 241);
       margin-right: 25px;
+      &:focus {
+        outline: none;
+      }
     }
   }
   .container {
