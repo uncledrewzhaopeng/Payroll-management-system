@@ -2,8 +2,9 @@
 <template>
     <div class="login">
         <div class="ms-login">
-            <div class="ms-logo"><img src="../assets/img/logo.png" alt=""></div>
-            <div class="ms-title">交流分享技术性论坛</div>
+            <div class="ms-login-div">
+                <!-- <div class="ms-logo"><img src="../../assets/img/logo.png" alt=""></div> -->
+            <div class="ms-title">薪资管理系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
                     <el-input v-model="param.username" placeholder="username" clearable>
@@ -18,7 +19,6 @@
                 </el-form-item>
                 <p class="forgetpass">
                     <a href="#" @click="forget()">忘记密码&ensp;？</a>
-
                 </p>
                 <div class="btn">
                     <el-button type="warning" @click="submitForm()">登录</el-button>
@@ -27,8 +27,8 @@
                     <el-button type="success" @click="register()">注册</el-button>
                 </div>
             </el-form>
+            </div>
         </div>
-
     </div>
 </template>
 
@@ -85,9 +85,9 @@
 <style lang="less" scoped>
     .login {
         position: relative;
-        width: 100%;
+        width: 50%;
         height: 100%;
-        background: url("../assets/img/loginbg.jpg");
+        background: url("../assets/img/bg.png");
         background-size: 100%;
     }
 
@@ -101,22 +101,37 @@
 
     .ms-title {
         width: 100%;
-        line-height: 50px;
+        line-height: 60px;
         text-align: center;
         font-size: 20px;
-        color: #fff;
+        color: black;
         border-bottom: 1px solid #ddd;
     }
 
     .ms-login {
-        position: absolute;
-        left: 48%;
-        top: 50%;
-        width: 25%;
-        margin: -190px 0 0 -175px;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.3);
-        overflow: hidden;
+        border-width: 0px;
+    position: absolute;
+    left: 650px;
+    top: 141px;
+    width: 300px;
+    height: 353px;
+    font-family: 'PingFang SC Medium', 'PingFang SC';
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+    .ms-login-div{
+        top: 0px;
+    width: 300px;
+    height: 353px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    border-radius: 6px;
+    -moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.349019607843137);
+    -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.349019607843137);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.349019607843137);
+    }
     }
 
     .ms-content {
@@ -131,8 +146,6 @@
             margin-bottom: 10px;
         }
     }
-
-
 
     .forgetpass {
         font-size: 12px;
