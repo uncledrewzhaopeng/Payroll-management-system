@@ -2,7 +2,7 @@
 <template>
     <div class="login">
         <div class="ms-login">
-            <div class="ms-logo"><img src="../assets/img/logo.png" alt=""></div>
+            <!-- <div class="ms-logo"><img src="../assets/img/logo.png" alt=""></div> -->
             <div class="ms-title">交流分享技术性论坛</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
@@ -62,7 +62,7 @@
                     if (valid) {
                         this.$message.success('登录成功');
                         // 存用户名
-                        localStorage.setItem('ms_username', this.param.username);
+                        localStorage.setItem('username', this.param.username);
                         this.$router.push('/');
                     } else {
                         this.$message.error('请输入账号和密码');
@@ -87,7 +87,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        background: url("../assets/img/loginbg.jpg");
+        // background: url("../assets/img/loginbg.jpg");
         background-size: 100%;
     }
 
