@@ -57,7 +57,7 @@
                     },
                     {
                         imgurl: require("../assets/img/sidebarimg/baobiao.png"),
-                        index: "baobiao",
+                        index: "statistics",
                         title: "工资报表",
                     },
                     {

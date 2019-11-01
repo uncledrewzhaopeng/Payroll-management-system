@@ -49,7 +49,15 @@ const routes = [{
                 meta: {
                     title: '出勤统计'
                 }
-            }
+            },
+            {
+                path: '/statistics',
+                name: 'statistics',
+                component: () => import( /* webpackChunkName: "attendance" */ '../views/Statistics.vue'),
+                meta: {
+                    title: '工资报表'
+                }
+            },
         ]
     },
     {
