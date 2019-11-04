@@ -239,14 +239,13 @@ export default {
     border-radius: 5px;
     box-shadow: 0px 2px 20px rgba(37, 97, 239, 0.827450980392157);
     font-size: 16px;
-
     span {
       position: absolute;
       left: 114px;
       top: -12px;
       width: 276px;
       word-wrap: break-word;
-      color: #ffffff;
+      color: #fff;
     }
   }
 }

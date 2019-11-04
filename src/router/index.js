@@ -58,6 +58,14 @@ const routes = [{
                     title: '工资报表'
                 }
             },
+            {
+                path: '/editaddend',
+                name: 'editaddend',
+                component: () => import( /* webpackChunkName: "attendance" */ '../views/EditAddend.vue'),
+                meta: {
+                    title: '编辑出勤'
+                }
+            },
         ]
     },
     {

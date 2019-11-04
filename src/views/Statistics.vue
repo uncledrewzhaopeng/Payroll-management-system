@@ -37,7 +37,7 @@
         <el-table-column prop="other" label="其它"></el-table-column>
         <el-table-column prop="real" label="实发工资"></el-table-column>
         <el-table-column prop="operation" label="操作">
-          <el-button type="text" icon="el-icon-edit" size="large">编辑</el-button>
+          <el-button type="text" icon="el-icon-edit" size="large" @click="jump_editaddend()">编辑</el-button>
         </el-table-column>
       </el-table>
       <el-row>
@@ -147,6 +147,9 @@ export default {
   methods: {
     changePage(val) {
       console.log(val);
+    },
+    jump_editaddend() {
+      this.$router.push('/editaddend');
     }
   }
 };
