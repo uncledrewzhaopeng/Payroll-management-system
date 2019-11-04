@@ -8,7 +8,7 @@
         <el-breadcrumb-item>编辑出勤</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="manage">
+    <div class="edit">
       <span>编辑出勤</span>
     </div>
     <div class="container">
@@ -17,8 +17,8 @@
       </div>
       <div class="container_text">
         <span>
-          出勤情况-
-          <span class="little">2018年8月</span>
+          出勤情况
+          <span class="little">-2018年8月</span>
         </span>
       </div>
       <div class="container_frame">
@@ -107,11 +107,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return{
+      input: ""
+    }
+  }
+};
 </script>
 
 <style lang="less">
-.manage {
+.edit {
   display: flex;
   margin: 20px 0px;
   position: relative;
