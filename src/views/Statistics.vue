@@ -6,11 +6,7 @@
           <div class="head-item head-title">{{title}}</div>
           <div class="head-item">
             <span>月份</span>
-            <el-date-picker
-              v-model="search_form.month"
-              type="month"
-              placeholder="选择月">
-            </el-date-picker>
+            <el-date-picker v-model="search_form.month" type="month" placeholder="选择月"></el-date-picker>
           </div>
           <div class="head-item">
             <el-button type="primary" icon="el-icon-download" plain round>导出</el-button>
@@ -18,16 +14,32 @@
         </el-col>
         <el-col :span="8" class="search-head">
           <i class="el-icon-search"></i>
-          <input type="text" class="search" placeholder="搜索工号、部门、姓名">
+          <input type="text" class="search" placeholder="搜索工号、部门、姓名" />
         </el-col>
       </el-row>
     </div>
     <div class="container">
-      表格内容
-      表格内容
-      表格内容
-      表格内容
-      表格内容
+      <el-table :data="tableData" stripe style="width: 100%">
+        <el-table-column prop="department" label="部门"></el-table-column>
+        <el-table-column prop="name" label="姓名"></el-table-column>
+        <el-table-column prop="attendance" label="应出勤天数"></el-table-column>
+        <el-table-column prop="leave" label="请假天数"></el-table-column>
+        <el-table-column prop="actual" label="实际出勤天数"></el-table-column>
+        <el-table-column prop="base" label="基本工资"></el-table-column>
+        <el-table-column prop="station" label="岗位工资"></el-table-column>
+        <el-table-column prop="shouldsend" label="应发工资"></el-table-column>
+        <el-table-column prop="performance" label="绩效工资"></el-table-column>
+        <el-table-column prop="violation" label="违规扣款"></el-table-column>
+        <el-table-column prop="social" label="社保扣款"></el-table-column>
+        <el-table-column prop="duty" label="全勤奖"></el-table-column>
+        <el-table-column prop="overtime" label="加班天数"></el-table-column>
+        <el-table-column prop="overtimepay" label="加班费"></el-table-column>
+        <el-table-column prop="other" label="其它"></el-table-column>
+        <el-table-column prop="real" label="实发工资"></el-table-column>
+        <el-table-column prop="operation" label="操作">
+          <el-button type="text" icon="el-icon-edit" size="large">编辑</el-button>
+        </el-table-column>
+      </el-table>
       <el-row>
         <el-pagination
           v-if="total > 0"
@@ -37,8 +49,8 @@
           :total="total"
           :pager-count="5"
           layout="total, prev, pager, next"
-          style="float:right; margin: 25px 0 0;">
-        </el-pagination>
+          style="float:right; margin: 25px 0 0;"
+        ></el-pagination>
       </el-row>
     </div>
   </div>
@@ -46,24 +58,98 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      title: '工资报表',
+      title: "工资报表",
       search_form: {
-        month: '',
-        name: ''
+        month: "",
+        name: ""
       },
       total: 100,
       currentPage: 1,
-      pageSize: 20
-    }
+      pageSize: 20,
+      tableData: [
+        {
+          department: "技术部",
+          name: "扫地僧",
+          attendance: 22,
+          leave: 2,
+          actual: 20,
+          base: 7000,
+          station: 2000,
+          shouldsend: 8300,
+          performance: 800,
+          violation: 100,
+          social: 1000,
+          duty: 100,
+          overtime: 0,
+          overtimepay: 0,
+          other: 0,
+          real: 9100
+        },
+        {
+          department: "技术部",
+          name: "扫地僧",
+          attendance: 22,
+          leave: 2,
+          actual: 20,
+          base: 7000,
+          station: 2000,
+          shouldsend: 8300,
+          performance: 800,
+          violation: 100,
+          social: 1000,
+          duty: 100,
+          overtime: 0,
+          overtimepay: 0,
+          other: 0,
+          real: 9100
+        },
+        {
+          department: "技术部",
+          name: "扫地僧",
+          attendance: 22,
+          leave: 2,
+          actual: 20,
+          base: 7000,
+          station: 2000,
+          shouldsend: 8300,
+          performance: 800,
+          violation: 100,
+          social: 1000,
+          duty: 100,
+          overtime: 0,
+          overtimepay: 0,
+          other: 0,
+          real: 9100
+        },
+        {
+          department: "技术部",
+          name: "扫地僧",
+          attendance: 22,
+          leave: 2,
+          actual: 20,
+          base: 7000,
+          station: 2000,
+          shouldsend: 8300,
+          performance: 800,
+          violation: 100,
+          social: 1000,
+          duty: 100,
+          overtime: 0,
+          overtimepay: 0,
+          other: 0,
+          real: 9100
+        }
+      ]
+    };
   },
   methods: {
-    changePage (val) {
+    changePage(val) {
       console.log(val);
     }
   }
-}
+};
 </script>
 
 <style lang="less">
@@ -104,29 +190,20 @@ export default {
       }
     }
   }
-  .container {
+
+  .el-table td,
+  .el-table th {
     text-align: center;
   }
-  .c-head {
-    font-weight: bold;
-    color: #666;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #eee;
-    .el-col {
-      border-right: 2px solid #ddd;
-      &:last-of-type {
-        border-right: none;
-      }
-    }
+  .el-table th > .cell {
+    font-size: 13.5px;
   }
-  .c-item {
-    padding: 12px 0;
-    .el-button {
-      padding: 0;
-    }
-    &:nth-of-type(2n + 1) {
-      background-color: #dae8fa;
-    }
+  .el-table td > .cell {
+    font-size: 13px;
+  }
+  .el-table .cell,
+  .el-table th div {
+    padding: 0;
   }
 }
 </style>
