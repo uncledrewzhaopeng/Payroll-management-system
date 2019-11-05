@@ -1,4 +1,4 @@
-# vue_bbs
+# 薪资管理系统
 
 ## Project setup
 ```
