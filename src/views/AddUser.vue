@@ -252,8 +252,44 @@
             flex-wrap: wrap;
             justify-content: space-between;
 
+            .el-select {
+                display: inline-block;
+                position: relative;
+                width: 100%;
+            }
+
+            .el-form-item__label {
+                width: 160px !important;
+                font-size: 18px !important;
+                color: #888888 !important;
+                margin-bottom: 20px;
+            }
+
+            .el-form-item {
+                display: flex;
+                align-items: center;
+            }
+
+            .el-form-item__content {
+                margin-left: 0px !important;
+            }
+
+            .el-input__suffix {
+                top: -8px !important;
+                -webkit-transition: all .3s;
+                transition: all .3s;
+            }
+
+            .el-col-24 {
+                width: 100%;
+                display: flex;
+                margin: 40px 0px 40px 0px;
+                justify-content: flex-end;
+            }
+
             .form-item-css {
                 width: 33%;
+
                 .el-input__inner {
                     width: 278px !important;
                     height: 40px !important;
