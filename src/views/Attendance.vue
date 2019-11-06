@@ -33,14 +33,14 @@
         <el-col :span="3">未写日志次数</el-col>
         <el-col :span="3">操作</el-col>
       </el-row>
-      <el-row :gutter="20" class="c-item" v-for="(item, i) in arr" :key="i">
-        <el-col :span="3">李明</el-col>
-        <el-col :span="3">技术部</el-col>
-        <el-col :span="3">4</el-col>
-        <el-col :span="3">4</el-col>
-        <el-col :span="3">3</el-col>
-        <el-col :span="3">5</el-col>
-        <el-col :span="3">5</el-col>
+      <el-row :gutter="20" class="c-item" v-for="(item, i) in list" :key="i">
+        <el-col :span="3">{{item.name}}</el-col>
+        <el-col :span="3">{{item.branch}}</el-col>
+        <el-col :span="3">{{item.late_count}}</el-col>
+        <el-col :span="3">{{item.quit_count}}</el-col>
+        <el-col :span="3">{{item.nocard_count}}</el-col>
+        <el-col :span="3">{{item.longwork_day}}</el-col>
+        <el-col :span="3">{{item.nolog_count}}</el-col>
         <el-col :span="3">
           <el-button type="text" icon="el-icon-edit" size="large" @click="editHandler">编辑</el-button>
         </el-col>
@@ -62,7 +62,26 @@
 </template>
 
 <script>
+import { Loading } from 'element-ui';
 export default {
+  beforeRouteEnter (to, from, next) {
+    function getList () {
+      return axios.get('/attendance/list')
+    }
+
+    let loadingInstance = Loading.service({ fullscreen: true });
+    axios.all([getList()])
+      .then(axios.spread((list) => {
+        console.log(list);
+        to.params.list = list.data.content.attendanceList;
+        to.params.total = list.data.content.total;
+        loadingInstance.close();
+        next();
+      }))
+      .catch(error => {
+        console.error(error);
+      });
+  },
   data () {
     return {
       title: '出勤统计',
@@ -70,8 +89,8 @@ export default {
         month: '',
         name: ''
       },
-      arr: [1,2,3,4,5,6,7,8],
-      total: 100,
+      list: this.$route.params.list,
+      total: this.$route.params.total,
       currentPage: 1,
       pageSize: 20
     }

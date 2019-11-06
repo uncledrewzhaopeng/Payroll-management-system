@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 
 import userAPI from './tablelist'
+import attendance from './attendancelist'
 
 
 // 设置全局延时 没有延时的话有时候会检测不到数据变化 建议保留
@@ -9,5 +10,7 @@ Mock.setup({
 })
 
 Mock.mock(/\/user\/list\/get/, 'get', userAPI.getlist)
+// 出勤统计列表
+Mock.mock(/\/attendance\/list/, 'get', attendance.getlist)
 
 export default Mock;
