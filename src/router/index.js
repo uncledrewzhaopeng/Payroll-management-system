@@ -4,7 +4,8 @@ import Layout from '../components/Layout.vue'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         redirect: '/indextest'
     },
@@ -35,13 +36,13 @@ const routes = [{
 
             },
             {
-              path: '/addadmin',
-              name: 'addadmin',
-              component: () => import( /* webpackChunkName: "setting" */ '../views/Addadmin.vue'),
-              meta: {
-                  title: '新增管理员'
-              },  
-          },
+                path: '/addadmin',
+                name: 'addadmin',
+                component: () => import( /* webpackChunkName: "setting" */ '../views/Addadmin.vue'),
+                meta: {
+                    title: '新增管理员'
+                },
+            },
             {
                 path: '/attendance',
                 name: 'attendance',
@@ -58,12 +59,20 @@ const routes = [{
                     title: '工资报表'
                 }
             },
+           
             {
                 path: '/editaddend',
                 name: 'editaddend',
                 component: () => import( /* webpackChunkName: "attendance" */ '../views/EditAddend.vue'),
                 meta: {
                     title: '编辑出勤'
+                }
+            }, {
+                path: '/adduser',
+                name: 'adduser',
+                component: () => import( /* webpackChunkName: "attendance" */ '../views/AddUser.vue'),
+                meta: {
+                    title: '新增员工'
                 }
             },
         ]

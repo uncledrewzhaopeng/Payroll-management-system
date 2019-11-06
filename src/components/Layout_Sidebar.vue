@@ -110,11 +110,11 @@
     }
 
     // 激活菜单项实现动态更换背景色
-    .el-menu-item.is-active {
-        color: #6681FA;
-        background-color: #EAEEFF !important;
-        border-left: 5px solid blue;
-    }
+    // .el-menu-item.is-active {
+    //     color: #6681FA;
+    //     background-color: #EAEEFF !important;
+    //     border-left: 5px solid blue;
+    // }
 
     .sidebar-imgdiv {
         margin-top: 34px;

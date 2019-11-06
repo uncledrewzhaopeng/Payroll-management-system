@@ -12,7 +12,7 @@
         </div>
         <div class="usertool">
             <span class="usertitle">员工管理</span>
-            <el-button icon="el-icon-lx-xinzeng1" class="btn" round >新增</el-button>
+            <el-button icon="el-icon-lx-xinzeng1" class="btn" round @click="adduser" >新增</el-button>
             <el-button icon="el-icon-delete-solid" class="btn" round @click="delAll()">批量删除</el-button>
             <el-button icon="el-icon-lx-daochu" class="btn" round @click="exportExcel">导出</el-button>
             <div class="search">
@@ -44,7 +44,7 @@
 
                 <el-table-column fixed="right" label="操作">
                     <template slot-scope="scope">
-                        <el-button type="text" icon="el-icon-edit" size="large">编辑</el-button>
+                        <el-button type="text" icon="el-icon-edit" size="large" @click="adduser">编辑</el-button>
                         <el-button type="text" icon="el-icon-delete-solid" size="large"
                             @click.native.prevent="deleteRow(scope.$index, tableData)">删除</el-button>
                     </template>
@@ -220,7 +220,10 @@
             changePage(val) {
                 console.log(val);
             },
-            // 导出功能
+            adduser(){
+                this.$router.push("/adduser")
+            },        
+             // 导出功能
             exportExcel() {
                 require.ensure([], () => {
                     const {
@@ -258,11 +261,11 @@
 
     // 斑马纹
     .el-table .warning-row {
-        background: oldlace;
+        background: #dae8fa;
     }
 
     .el-table .success-row {
-        background: #f0f9eb;
+        background: white;
     }
 
     .usertool {
