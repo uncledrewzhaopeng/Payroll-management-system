@@ -18,6 +18,7 @@
     </div>
     <div class="container">
       <el-table
+        :row-class-name="tableRowClassName"
         :data="tableData"
         style="width: 100%"
         @selection-change="handleSelectionChange"
@@ -31,7 +32,6 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <!-- :row-class-name="tableRowClassName" -->
             <el-button
               @click="handleClick(scope.row)"
               type="text"
@@ -43,10 +43,16 @@
         </el-table-column>
       </el-table>
       <el-row>
-        <el-pagination v-if="total > 0" @current-change="changePage" :current-page="currentPage"
-          :page-size="pageSize" :total="total" :pager-count="5" layout="total, prev, pager, next"
-            style="float:right; margin: 25px 0 0;">
-        </el-pagination>
+        <el-pagination
+          v-if="total > 0"
+          @current-change="changePage"
+          :current-page="currentPage"
+          :page-size="pageSize"
+          :total="total"
+          :pager-count="5"
+          layout="total, prev, pager, next"
+          style="float:right; margin: 25px 0 0;"
+        ></el-pagination>
       </el-row>
     </div>
   </div>
@@ -58,7 +64,7 @@ export default {
     return {
       value: true,
       input: "",
-      checked:false,
+      checked: false,
       total: 100,
       pageSize: 20,
       currentPage: 1,
@@ -111,14 +117,14 @@ export default {
       console.log(row);
       this.$router.push("/addadmin");
     },
-    // tableRowClassName({row, rowIndex}) {
-    //     if (rowIndex === 1) {
-    //       return 'warning-row';
-    //     } else if (rowIndex === 3) {
-    //       return 'success-row';
-    //     }
-    //     return '';
-    // },
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex % 2 == 1) {
+        return "warning-row";
+      } else if (rowIndex % 2 == 0) {
+        return "success-row";
+      }
+      return "";
+    },
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
@@ -140,6 +146,14 @@ export default {
 
 .el-table .cell {
   font-size: 14px;
+}
+
+.el-table .warning-row {
+  background: #dae8fa;
+}
+
+.el-table .success-row {
+  background: white;
 }
 
 .adminitool {
