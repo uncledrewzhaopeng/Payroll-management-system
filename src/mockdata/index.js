@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 
 import userAPI from './tablelist'
+import attendance from './attendancelist'
 
 // 引入admin.js
 import adminAPI from './admin'
@@ -12,6 +13,8 @@ Mock.setup({
 })
 
 Mock.mock(/\/user\/list\/get/, 'get', userAPI.getlist)
+// 出勤统计列表
+Mock.mock(/\/attendance\/list/, 'get', attendance.getlist)
 
 // 获取管理员列表
 Mock.mock(/\/user\/dataList\/getAdminlist/, 'get', adminAPI.getAdmin)

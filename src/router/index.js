@@ -52,6 +52,14 @@ const routes = [
                 }
             },
             {
+                path: '/edit_attendance',
+                name: 'editAttendance',
+                component: () => import( /* webpackChunkName: "editAttendance" */ '../views/EditAttendance.vue'),
+                meta: {
+                    title: '编辑出勤统计'
+                }
+            },
+            {
                 path: '/statistics',
                 name: 'statistics',
                 component: () => import( /* webpackChunkName: "attendance" */ '../views/Statistics.vue'),
