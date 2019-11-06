@@ -27,10 +27,10 @@
                 <el-table-column prop="phone" label="手机">
                 </el-table-column>
 
-                <!-- v-for="(item,index) in value" :key=index -->
-                <!-- v-model="value" -->
-                <el-table-column prop="state" label="状态">
-                    <el-switch v-model="value" :key=index active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                <el-table-column  label="状态">
+                    <template slot-scope="scope">
+                        <el-switch disabled v-model="scope.row.state" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                    </template>
                 </el-table-column>
 
                 <el-table-column label="操作">
@@ -40,6 +40,7 @@
                         <el-button type="text" size="small" icon="el-icon-delete">删除</el-button>
                     </template>
                 </el-table-column>
+
             </el-table>
             <el-row>
                 <el-pagination v-if="total > 0" :current-page="currentPage4" :page-sizes="pageSizes"
@@ -47,6 +48,8 @@
                     @current-change="handleCurrentChange"></el-pagination>
             </el-row>
         </div>
+
+
     </div>
 </template>
 
@@ -58,7 +61,6 @@
     export default {
         data() {
             return {
-                value: '',
                 input: "",
                 checked: false,
                 currentPage4: 4, //需要给分页组件传的信息
@@ -116,15 +118,11 @@
                         this.loading = false;
                         let tabletotal = res.data.data.total;
                         let tabledata = res.data.data.admin;
-                        let tablestate = res.data.data.state[0];
                         this.total = tabletotal;
                         this.tableData = tabledata;
-                        this.value = tablestate;
-                        //   debugger
-                        //   console.log(res);
                     })
                     .catch(err => {
-                        //   console.log(err);
+                          console.log(err);
                     });
             }
         },
@@ -211,11 +209,12 @@
     .el-button--text {
         font-size: 15px;
     }
-.el-button--text {
-  font-size: 15px;
-}
 
-.el-pagination {
-    white-space: normal;
-}
+    .el-button--text {
+        font-size: 15px;
+    }
+
+    .el-pagination {
+        white-space: normal;
+    }
 </style>
