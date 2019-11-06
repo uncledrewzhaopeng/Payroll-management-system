@@ -42,7 +42,7 @@
         <el-col :span="3">5</el-col>
         <el-col :span="3">5</el-col>
         <el-col :span="3">
-          <el-button type="text" icon="el-icon-edit" size="large">编辑</el-button>
+          <el-button type="text" icon="el-icon-edit" size="large" @click="editHandler">编辑</el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -79,6 +79,11 @@ export default {
   methods: {
     changePage (val) {
       console.log(val);
+    },
+    editHandler () {
+      this.$router.push({
+        path: '/edit_attendance'
+      })
     }
   }
 }
