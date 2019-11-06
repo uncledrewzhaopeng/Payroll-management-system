@@ -8,7 +8,7 @@ for (let i = 0; i < count; i++) {
         name: Mock.Random.cname(),
         number: Mock.Random.natural(600000, 1000000),
         'phone|10000000000-19999999999': 18380271137,
-        "state|1": true
+        "state|1": Mock.mock([true,false])
     }))
 }
 console.log("dataList:", List)
@@ -27,12 +27,14 @@ export default {
         } = JSON.parse(config.body);
         let mockList = List;
         const admin = mockList.filter((item, index) => index < limit * currentpage && index >= limit * (currentpage - 1))
+        var tablestate = mockList.map((item) => item.state)
         // debugger
         return {
             code: 200,
             data: {
                 total: mockList.length,
-                admin: admin
+                admin: admin,
+                state:tablestate
             }
         }
     }
