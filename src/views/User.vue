@@ -21,32 +21,22 @@
             </div>
         </div>
         <div class="container">
-
-
             <el-table v-loading="loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading"
                 element-loading-background="rgba(0, 0, 0, 0.2)" stripe highlight-current-row
                 :header-cell-style="{background:'#dddddd',color:'#606266'}" :data="tableData" style="width: 100%">
-                <el-table-column type="index" label="序号" width="60" align="center" fixed="">
+                <el-table-column type="index" label="序号" width="60" align="center" fixed>
                     <template slot-scope="scope">
                         <span>{{scope.$index+(paginations.pageIndex - 1) * paginations.pageSize + 1}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column type="selection" width="55">
-                </el-table-column>
-                <el-table-column prop="id" label="ID" v-if="show">
-                </el-table-column>
-                <el-table-column prop="name" label="姓名">
-                </el-table-column>
-                <el-table-column prop="number" label="工号">
-                </el-table-column>
-                <el-table-column prop="branch" label="部门">
-                </el-table-column>
-                <el-table-column prop="phone" label="手机">
-                </el-table-column>
-                <el-table-column prop="email" label="邮箱">
-                </el-table-column>
-                <el-table-column prop="education" label="学历">
-                </el-table-column>
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column prop="id" label="ID" v-if="show"></el-table-column>
+                <el-table-column prop="name" label="姓名"></el-table-column>
+                <el-table-column prop="number" label="工号"></el-table-column>
+                <el-table-column prop="branch" label="部门"></el-table-column>
+                <el-table-column prop="phone" label="手机"></el-table-column>
+                <el-table-column prop="email" label="邮箱"></el-table-column>
+                <el-table-column prop="education" label="学历"></el-table-column>
 
                 <el-table-column fixed="right" label="操作">
                     <template slot-scope="scope">
@@ -55,29 +45,29 @@
                             @click.native.prevent="deleteRow(scope.$index, tableData)">删除</el-button>
                     </template>
                 </el-table-column>
-                </el-table>
+            </el-table>
 
-                <!-- 删除提示框 -->
+            <!-- 删除提示框 -->
 
-                <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
-                    <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
-                    <span slot="footer" class="dialog-footer">
-                        <el-button @click="delVisible = false">取 消</el-button>
-                        <!--  @click="deletethisrows" -->
-                        <el-button type="primary">确 定</el-button>
-                    </span>
-                </el-dialog>
-                <!--分页-->
-                <el-row >
+            <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
+                <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="delVisible = false">取 消</el-button>
+                    <!--  @click="deletethisrows" -->
+                    <el-button type="primary">确 定</el-button>
+                </span>
+            </el-dialog>
+            <!--分页-->
+            <div class="pagination">
+                <el-row>
                     <el-col :span="24">
-                        <div class="pagination">
-                            <el-pagination v-if="paginations.total > 0" :current-page="currentPage4"
-                                :page-sizes="paginations.pageSizes" :page-size="paginations.pageSize"
-                                :layout="paginations.layout" :total="paginations.total" @size-change="handleSizeChange"
-                                @current-change="handleCurrentChange"></el-pagination>
-                        </div>
+                        <el-pagination v-if="paginations.total > 0" :current-page="currentPage4"
+                            :page-sizes="paginations.pageSizes" :page-size="paginations.pageSize"
+                            :layout="paginations.layout" :total="paginations.total" @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"></el-pagination>
                     </el-col>
                 </el-row>
+            </div>
         </div>
     </div>
 </template>
@@ -109,7 +99,7 @@
                     pageSizes: [5, 20, 30, 50, 100, 1000], //每页显示多少条
                     layout: "total, sizes, prev, pager, next, jumper" // 翻页属性
                 }
-            }
+            };
         },
         components: {},
         methods: {
@@ -133,28 +123,26 @@
                 const length = this.multipleSelection.length;
                 if (length < 1) {
                     this.delVisible = false;
-                    this.$message.error('请至少先选择一行！')
+                    this.$message.error("请至少先选择一行！");
                 } else {
                     for (let i = 0; i < length; i++) {
-
-                        this.delarr.push(this.multipleSelection[i].id)
+                        this.delarr.push(this.multipleSelection[i].id);
                     }
                     this.delVisible = false; //显示删除弹框
                 }
-                console.log(this.delarr)
+                console.log(this.delarr);
             },
             // 单行删除
             deleteRow(index, rows) {
-                debugger
+                debugger;
                 rows.splice(index, 1);
-                var type = "success"
+                var type = "success";
                 this.$message({
                     showClose: true,
-                    message: '成功删除信息',
+                    message: "成功删除信息",
                     type: type
-                })
+                });
                 this.delVisible = false;
-
             },
             // 多选
             handleSelectionChange(val) {
@@ -166,18 +154,18 @@
                 rowIndex
             }) {
                 if (rowIndex % 2 == 1) {
-                    return 'warning-row';
+                    return "warning-row";
                 } else if (rowIndex % 2 == 0) {
-                    return 'success-row';
+                    return "success-row";
                 }
-                return '';
+                return "";
             },
             // 分页每页的改变
             changePage(val) {
                 console.log(val);
             },
             adduser() {
-                this.$router.push("/adduser")
+                this.$router.push("/adduser");
             },
             // 每页多少条切换
             handleSizeChange(pageSize) {
@@ -209,33 +197,40 @@
                 require.ensure([], () => {
                     const {
                         export_json_to_excel
-                    } = require('../assets/excel/Export2Excel');
+                    } = require("../assets/excel/Export2Excel");
                     // 设置Excel的表格第一行的标题
-                    const tHeader = ['姓名', '工号', '部门', '手机', "邮箱", "学历"];
+                    const tHeader = ["姓名", "工号", "部门", "手机", "邮箱", "学历"];
                     // index、nickName、name是tableData里对象的属性
-                    const filterVal = ['name', 'number', 'branch', 'phone', 'email', 'education', ];
+                    const filterVal = [
+                        "name",
+                        "number",
+                        "branch",
+                        "phone",
+                        "email",
+                        "education"
+                    ];
                     //把data里的tableData存到list
                     const list = this.tableData;
                     const data = this.formatJson(filterVal, list);
-                    export_json_to_excel(tHeader, data, '员工excel');
-                })
+                    export_json_to_excel(tHeader, data, "员工excel");
+                });
             },
             formatJson(filterVal, jsonData) {
-                return jsonData.map(v => filterVal.map(j => v[j]))
+                return jsonData.map(v => filterVal.map(j => v[j]));
             }
         },
         mounted() {
             this.gettablelist();
         }
-    }
+    };
 </script>
 
 <!-- style -->
 <style lang="less">
-.el-table{
-    float:right;
+    .el-table {
+        float: right;
+    }
 
-}
     /*表格居中*/
     .el-table th,
     .el-table td {
@@ -271,15 +266,15 @@
         .btn {
             margin: 0px 30px 0px 30px;
             border-radius: 20px;
-            color: #409EFF;
+            color: #409eff;
             background: #ecf5ff;
             border-color: #b3d8ff;
             font-size: 12px;
 
             &:hover {
-                background: #409EFF;
-                border-color: #409EFF;
-                color: #FFF;
+                background: #409eff;
+                border-color: #409eff;
+                color: #fff;
                 font-size: 12px;
             }
         }
@@ -310,6 +305,14 @@
                 font-size: 18px;
             }
         }
+    }
 
+    .pagination {
+        .el-col-24 {
+            width: 100%;
+            display: flex;
+            margin: 40px 0px 40px 0px;
+            justify-content: flex-end;
+        }
     }
 </style>
