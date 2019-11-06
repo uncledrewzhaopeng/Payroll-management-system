@@ -12,7 +12,7 @@
         </div>
         <div class="usertool">
             <span class="usertitle">员工管理</span>
-            <el-button icon="el-icon-lx-xinzeng1" class="btn" round @click="adduser" >新增</el-button>
+            <el-button icon="el-icon-lx-xinzeng1" class="btn" round @click="adduser">新增</el-button>
             <el-button icon="el-icon-delete-solid" class="btn" round @click="delAll()">批量删除</el-button>
             <el-button icon="el-icon-lx-daochu" class="btn" round @click="exportExcel">导出</el-button>
             <div class="search">
@@ -23,8 +23,14 @@
         <div class="container">
 
 
-            <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName"
-                @selection-change="handleSelectionChange">
+            <el-table v-loading="loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading"
+                element-loading-background="rgba(0, 0, 0, 0.2)" stripe highlight-current-row
+                :header-cell-style="{background:'#dddddd',color:'#606266'}" :data="tableData" style="width: 100%">
+                <el-table-column type="index" label="序号" width="60" align="center" fixed="">
+                    <template slot-scope="scope">
+                        <span>{{scope.$index+(paginations.pageIndex - 1) * paginations.pageSize + 1}}</span>
+                    </template>
+                </el-table-column>
                 <el-table-column type="selection" width="55">
                 </el-table-column>
                 <el-table-column prop="id" label="ID" v-if="show">
@@ -49,32 +55,38 @@
                             @click.native.prevent="deleteRow(scope.$index, tableData)">删除</el-button>
                     </template>
                 </el-table-column>
-            </el-table>
+                </el-table>
 
-            <!-- 删除提示框 -->
+                <!-- 删除提示框 -->
 
-            <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
-                <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
-                <span slot="footer" class="dialog-footer">
-                    <el-button @click="delVisible = false">取 消</el-button>
-                    <!--  @click="deletethisrows" -->
-                    <el-button type="primary">确 定</el-button>
-                </span>
-            </el-dialog>
-
-            <!-- 分页条 -->
-            <el-row>
-                <el-pagination v-if="total > 0" @current-change="changePage" :current-page="currentPage"
-                    :page-size="pageSize" :total="total" :pager-count="5" layout="total, prev, pager, next"
-                    style="float:right; margin: 25px 0 0;">
-                </el-pagination>
-            </el-row>
+                <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
+                    <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="delVisible = false">取 消</el-button>
+                        <!--  @click="deletethisrows" -->
+                        <el-button type="primary">确 定</el-button>
+                    </span>
+                </el-dialog>
+                <!--分页-->
+                <el-row >
+                    <el-col :span="24">
+                        <div class="pagination">
+                            <el-pagination v-if="paginations.total > 0" :current-page="currentPage4"
+                                :page-sizes="paginations.pageSizes" :page-size="paginations.pageSize"
+                                :layout="paginations.layout" :total="paginations.total" @size-change="handleSizeChange"
+                                @current-change="handleCurrentChange"></el-pagination>
+                        </div>
+                    </el-col>
+                </el-row>
         </div>
     </div>
 </template>
 
 <!-- script -->
 <script type="text/ecmascript-6">
+    import {
+        getlist
+    } from "../api/basetablerequest";
     export default {
         name: "user",
         data() {
@@ -86,74 +98,17 @@
                 delVisible: false, //删除提示弹框的状态
 
                 input: "",
-                total: 100,
-                currentPage: 1,
-                pageSize: 20,
-                tableData: [{
-                    id: 1,
-                    name: '王小虎1',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, {
-                    id: 2,
-                    name: '王小虎2',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, {
-                    id: 3,
-                    name: '王小虎3',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, {
-                    id: 4,
-                    name: '王小虎4',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, {
-                    id: 5,
-                    name: '王小虎5',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, {
-                    id: 6,
-                    name: '王小虎6',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, {
-                    id: 7,
-                    name: '王小虎7',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, {
-                    id: 8,
-                    name: '王小虎8',
-                    number: "20180609001",
-                    branch: '技术部',
-                    phone: "18854138756",
-                    email: "18854138756@163.com",
-                    education: "本科"
-                }, ]
+                currentPage4: 4,
+                //需要给分页组件传的信息
+                tableData: [],
+                loading: true,
+                paginations: {
+                    total: 0, // 总数
+                    pageIndex: 1, // 当前页
+                    pageSize: 5, // 1页显示多少条
+                    pageSizes: [5, 20, 30, 50, 100, 1000], //每页显示多少条
+                    layout: "total, sizes, prev, pager, next, jumper" // 翻页属性
+                }
             }
         },
         components: {},
@@ -181,7 +136,7 @@
                     this.$message.error('请至少先选择一行！')
                 } else {
                     for (let i = 0; i < length; i++) {
-                        
+
                         this.delarr.push(this.multipleSelection[i].id)
                     }
                     this.delVisible = false; //显示删除弹框
@@ -221,10 +176,35 @@
             changePage(val) {
                 console.log(val);
             },
-            adduser(){
+            adduser() {
                 this.$router.push("/adduser")
-            },        
-             // 导出功能
+            },
+            // 每页多少条切换
+            handleSizeChange(pageSize) {
+                this.paginations.pageSize = pageSize;
+                this.gettablelist();
+            },
+            // 上下分页
+            handleCurrentChange(page) {
+                this.paginations.pageIndex = page;
+                this.gettablelist();
+            },
+            gettablelist() {
+                // 先准备两个传送给后台的参数，当前页，当前页显示的条数
+                let pagedata = {
+                    limit: this.paginations.pageSize,
+                    currentpage: this.paginations.pageIndex
+                };
+                getlist(pagedata).then(res => {
+                    this.loading = false;
+                    let tabletotal = res.data.data.total;
+                    let tabledata = res.data.data.tablelist;
+                    this.paginations.total = tabletotal;
+                    this.tableData = tabledata;
+                    //  debugger
+                });
+            },
+            // 导出功能
             exportExcel() {
                 require.ensure([], () => {
                     const {
@@ -244,11 +224,18 @@
                 return jsonData.map(v => filterVal.map(j => v[j]))
             }
         },
+        mounted() {
+            this.gettablelist();
+        }
     }
 </script>
 
 <!-- style -->
 <style lang="less">
+.el-table{
+    float:right;
+
+}
     /*表格居中*/
     .el-table th,
     .el-table td {

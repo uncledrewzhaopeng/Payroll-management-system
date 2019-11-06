@@ -12,6 +12,9 @@ Vue.use(ElementUI,{ size: 'small'});
 // 引入阿里巴巴图标,小心坑哦   要放在element-ui的后面
 import "./assets/css/icon.css"
 
+ // 导入mockjs数据
+ import "./mockdata/index"
+
 Vue.config.productionTip = false
 
 //使用钩子函数beforeEach对路由进行权限跳转
