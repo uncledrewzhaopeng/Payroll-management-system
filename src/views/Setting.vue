@@ -213,4 +213,8 @@ export default {
 .el-button--text {
   font-size: 15px;
 }
+
+.el-pagination {
+    white-space: normal;
+}
 </style>
