@@ -124,12 +124,13 @@ export default {
 </script>
 
 <style lang="less" >
-  // 激活菜单项实现动态更换背景色,
-    .el-menu-item.is-active {
-        color: white;
-        background-color: white !important;
-        border-left: 5px solid white;
-    }
+// 激活菜单项实现动态更换背景色,
+.el-menu-item.is-active {
+  color: white;
+  background-color: white !important;
+  border-left: 5px solid white;
+}
+
 .manage {
   display: flex;
   margin: 20px 0px;
