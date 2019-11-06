@@ -1,7 +1,7 @@
 <template>
   <div class="edit-attendance-page">
     <div class="container">
-      <el-form :model="attendance_form" :rules="attendance_rules" ref="attendance_form" label-width="40px" label-position="left" class="dialog-wrap">
+      <el-form :model="attendance_form" :rules="attendance_rules" ref="attendance_form" label-width="100px" label-position="left" class="dialog-wrap">
         <el-form-item>
           <el-row :gutter="20">
             <el-col :span="8">
@@ -99,8 +99,11 @@ export default {
   }
   .double-line {
     div {
-      margin: 5px 0;
+      margin: 0 0 10px;
     }
+  }
+  .el-row {
+    margin: 16px 0;
   }
 }
 </style>
