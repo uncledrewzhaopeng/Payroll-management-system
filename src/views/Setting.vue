@@ -24,11 +24,15 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" v-model="checked"></el-table-column>
-        <el-table-column prop="name" label="姓名"></el-table-column>
-        <el-table-column prop="number" label="工号"></el-table-column>
-        <el-table-column prop="phone" label="手机"></el-table-column>
+        <el-table-column prop="name" label="姓名">
+        </el-table-column>
+        <el-table-column prop="number" label="工号">
+        </el-table-column>
+        <el-table-column prop="phone" label="手机">
+        </el-table-column>
         <el-table-column prop="state" label="状态">
-          <el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+          <!-- v-model="value" -->
+          <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -45,13 +49,13 @@
       <el-row>
         <el-pagination
           v-if="total > 0"
-          @current-change="changePage"
-          :current-page="currentPage"
+          :current-page="currentPage4"
+          :page-sizes="pageSizes"
           :page-size="pageSize"
+          :layout="layout"
           :total="total"
-          :pager-count="5"
-          layout="total, prev, pager, next"
-          style="float:right; margin: 25px 0 0;"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
         ></el-pagination>
       </el-row>
     </div>
@@ -59,57 +63,21 @@
 </template>
 
 <script>
+import { getAdmin } from "../api/basetablerequest";
+
 export default {
   data() {
     return {
-      value: true,
+      // value: true,
       input: "",
       checked: false,
-      total: 100,
-      pageSize: 20,
-      currentPage: 1,
-      tableData: [
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        },
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        },
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        },
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        },
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        },
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        },
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        },
-        {
-          name: "扫地僧",
-          number: "20180609001",
-          phone: "12345678910"
-        }
-      ]
+      currentPage4: 4,//需要给分页组件传的信息
+      total: 0, // 总数
+      pageIndex: 1, // 当前页
+      pageSize: 5, // 1页显示多少条
+      pageSizes: [5, 20, 30, 50, 100, 1000], //每页显示多少条
+      layout: "total, sizes, prev, pager, next, jumper", // 翻页属性
+      tableData: []
     };
   },
   methods: {
@@ -128,19 +96,52 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
+    // 每页多少条切换
+    handleSizeChange(pageSize) {
+      this.pageSize = pageSize;
+      this.getAdminList();
+    },
+    // 上下分页
+    handleCurrentChange(page) {
+      this.pageIndex = page;
+      this.getAdminList();
+    },
     changePage(val) {
       console.log(val);
     },
     jump_addmin() {
       this.$router.push("/addadmin");
+    },
+    //获取管理员列表、分页
+    getAdminList() {
+      let pagedata = {
+        limit: this.pageSize,
+        currentpage: this.pageIndex
+      };
+      getAdmin(pagedata)
+        .then(res => {
+          this.loading = false;
+          let tabletotal = res.data.data.total;
+          let tabledata = res.data.data.admin;
+          // console.log(res.data.data.admin[0].state)
+          this.total = tabletotal;
+          this.tableData = tabledata;
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
+  },
+  mounted() {
+    this.getAdminList();
   }
 };
 </script>
 
 <style lang="less">
-.el-table th,
-.el-table td {
+ .el-table th,
+ .el-table td {
   text-align: center;
 }
 
