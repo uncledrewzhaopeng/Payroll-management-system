@@ -211,4 +211,11 @@
     .el-button--text {
         font-size: 15px;
     }
+.el-button--text {
+  font-size: 15px;
+}
+
+.el-pagination {
+    white-space: normal;
+}
 </style>
