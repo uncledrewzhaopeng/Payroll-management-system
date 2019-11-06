@@ -12,8 +12,8 @@
         </div>
         <div class="usertool">
             <span class="usertitle">员工管理</span>
-            <el-button icon="el-icon-lx-xinzeng1" class="btn" round>新增</el-button>
-            <el-button icon="el-icon-delete-solid" class="btn" round>批量删除</el-button>
+            <el-button icon="el-icon-lx-xinzeng1" class="btn" round >新增</el-button>
+            <el-button icon="el-icon-delete-solid" class="btn" round @click="delAll()">批量删除</el-button>
             <el-button icon="el-icon-lx-daochu" class="btn" round @click="exportExcel">导出</el-button>
             <div class="search">
                 <i class="el-icon-lx-sousuo"></i>
@@ -26,6 +26,8 @@
             <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName"
                 @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55">
+                </el-table-column>
+                <el-table-column prop="id" label="ID" v-if="show">
                 </el-table-column>
                 <el-table-column prop="name" label="姓名">
                 </el-table-column>
@@ -48,6 +50,18 @@
                     </template>
                 </el-table-column>
             </el-table>
+
+            <!-- 删除提示框 -->
+
+            <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
+                <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="delVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="deletethisrows">确 定</el-button>
+                </span>
+            </el-dialog>
+
+            <!-- 分页条 -->
             <el-row>
                 <el-pagination v-if="total > 0" @current-change="changePage" :current-page="currentPage"
                     :page-size="pageSize" :total="total" :pager-count="5" layout="total, prev, pager, next"
@@ -64,61 +78,75 @@
         name: "user",
         data() {
             return {
+                show: false, //id列的隐藏
+                msg: "", //记录每一条的信息，便于取id
+                delarr: [], //存放删除的数据
+                multipleSelection: [], //多选的数据
+                delVisible: false, //删除提示弹框的状态
+
                 input: "",
                 total: 100,
                 currentPage: 1,
                 pageSize: 20,
                 tableData: [{
-                    name: '王小虎',
+                    id: 1,
+                    name: '王小虎1',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
                     email: "18854138756@163.com",
                     education: "本科"
                 }, {
-                    name: '王小虎',
+                    id: 2,
+                    name: '王小虎2',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
                     email: "18854138756@163.com",
                     education: "本科"
                 }, {
-                    name: '王小虎',
+                    id: 3,
+                    name: '王小虎3',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
                     email: "18854138756@163.com",
                     education: "本科"
                 }, {
-                    name: '王小虎',
+                    id: 4,
+                    name: '王小虎4',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
                     email: "18854138756@163.com",
                     education: "本科"
                 }, {
-                    name: '王小虎',
+                    id: 5,
+                    name: '王小虎5',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
                     email: "18854138756@163.com",
                     education: "本科"
                 }, {
-                    name: '王小虎',
+                    id: 6,
+                    name: '王小虎6',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
                     email: "18854138756@163.com",
                     education: "本科"
                 }, {
-                    name: '王小虎',
+                    id: 7,
+                    name: '王小虎7',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
                     email: "18854138756@163.com",
                     education: "本科"
                 }, {
-                    name: '王小虎',
+                    id: 8,
+                    name: '王小虎8',
                     number: "20180609001",
                     branch: '技术部',
                     phone: "18854138756",
@@ -129,12 +157,54 @@
         },
         components: {},
         methods: {
-            deleteRow(index, rows) {
-                rows.splice(index, 1);
+            // 弹框确定删除
+            // deletethisrows() {
+            //     var length = this.delarr.length;
+            //       var rows = this.tableData;
+            //     for (let i = 0; i < length; i++) {
+            //     //        var num=this.delarr[i];
+            //     //    console.log(num)
+            //        debugger
+            //       var num =rows[i].id
+            //         this.deleteRow(num, rows);
+            //         this.delarr=[];
+            //         this.multipleSelection=[];
+            //     }
+            // },
+            //多行选中
+            delAll() {
+                this.delarr = [];
+                const length = this.multipleSelection.length;
+                if (length < 1) {
+                    this.delVisible = false;
+                    this.$message.error('请至少先选择一行！')
+                } else {
+                    for (let i = 0; i < length; i++) {
+                        
+                        this.delarr.push(this.multipleSelection[i].id)
+                    }
+                    this.delVisible = false; //显示删除弹框
+                }
+                console.log(this.delarr)
             },
+            // 单行删除
+            deleteRow(index, rows) {
+                debugger
+                rows.splice(index, 1);
+                var type = "success"
+                this.$message({
+                    showClose: true,
+                    message: '成功删除信息',
+                    type: type
+                })
+                this.delVisible = false;
+
+            },
+            // 多选
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
+            // 隔行换色的变换
             tableRowClassName({
                 row,
                 rowIndex
@@ -146,12 +216,11 @@
                 }
                 return '';
             },
-            del() {
-                console.log(11111111111)
-            },
+            // 分页每页的改变
             changePage(val) {
                 console.log(val);
             },
+            // 导出功能
             exportExcel() {
                 require.ensure([], () => {
                     const {
@@ -167,7 +236,6 @@
                     export_json_to_excel(tHeader, data, '员工excel');
                 })
             },
-
             formatJson(filterVal, jsonData) {
                 return jsonData.map(v => filterVal.map(j => v[j]))
             }
