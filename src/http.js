@@ -7,7 +7,7 @@ axios.interceptors.request.use(
     // 发送请求前
     // let hash = location.hash.split('?')[0];
     // config.headers['Step-Url'] = location.pathname + hash;
-    // return config;
+    return config;
   },
   error => {
     // 请求错误处理
