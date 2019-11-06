@@ -1,5 +1,12 @@
 <template>
   <div class="Statistics">
+    <!--面包屑-->
+    <div class="crumbs">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">薪资管理系统</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/setting' }">工资报表</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <div class="head">
       <el-row>
         <el-col :span="16">
@@ -69,6 +76,60 @@ export default {
       currentPage: 1,
       pageSize: 20,
       tableData: [
+        {
+          department: "技术部",
+          name: "扫地僧",
+          attendance: 22,
+          leave: 2,
+          actual: 20,
+          base: 7000,
+          station: 2000,
+          shouldsend: 8300,
+          performance: 800,
+          violation: 100,
+          social: 1000,
+          duty: 100,
+          overtime: 0,
+          overtimepay: 0,
+          other: 0,
+          real: 9100
+        },
+        {
+          department: "技术部",
+          name: "扫地僧",
+          attendance: 22,
+          leave: 2,
+          actual: 20,
+          base: 7000,
+          station: 2000,
+          shouldsend: 8300,
+          performance: 800,
+          violation: 100,
+          social: 1000,
+          duty: 100,
+          overtime: 0,
+          overtimepay: 0,
+          other: 0,
+          real: 9100
+        },
+        {
+          department: "技术部",
+          name: "扫地僧",
+          attendance: 22,
+          leave: 2,
+          actual: 20,
+          base: 7000,
+          station: 2000,
+          shouldsend: 8300,
+          performance: 800,
+          violation: 100,
+          social: 1000,
+          duty: 100,
+          overtime: 0,
+          overtimepay: 0,
+          other: 0,
+          real: 9100
+        },
         {
           department: "技术部",
           name: "扫地僧",

@@ -117,14 +117,14 @@ export default {
       console.log(row);
       this.$router.push("/addadmin");
     },
-    tableRowClassName({ row, rowIndex }) {
-      if (rowIndex === 1) {
-        return "warning-row";
-      } else if (rowIndex === 3) {
-        return "success-row";
-      }
-      return "";
-    },
+    // tableRowClassName({row, rowIndex}) {
+    //     if (rowIndex === 1) {
+    //       return 'warning-row';
+    //     } else if (rowIndex === 3) {
+    //       return 'success-row';
+    //     }
+    //     return '';
+    // },
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
@@ -147,14 +147,6 @@ export default {
 .el-table .cell {
   font-size: 14px;
 }
-
-// .el-table .warning-row {
-//   background: oldlace;
-// }
-
-// .el-table .success-row {
-//   background: #f0f9eb;
-// }
 
 .adminitool {
   display: flex;

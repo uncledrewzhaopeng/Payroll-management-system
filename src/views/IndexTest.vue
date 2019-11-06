@@ -16,27 +16,27 @@
         <div class="cd">
           <span>迟到人次</span>
           <p>18次</p>
-          <p>查看未迟到的小伙伴</p>
+          <p @click="open_pop()">查看迟到的小伙伴</p>
         </div>
         <div class="zt">
           <span>早退人次</span>
           <p>3次</p>
-          <p>查看未早退的小伙伴</p>
+          <p @click="open_pop2()">查看早退的小伙伴</p>
         </div>
         <div class="kg">
           <span>旷工人次</span>
           <p>2次</p>
-          <p>查看未旷工的小伙伴</p>
+          <p @click="open_pop3()">查看旷工的小伙伴</p>
         </div>
         <div class="rz">
           <span>未写日志人次</span>
           <p>8次</p>
-          <p>查看未写日志的小伙伴</p>
+          <p @click="open_pop4()">查看未写日志的小伙伴</p>
         </div>
         <div class="dk">
           <span>打卡人次</span>
           <p>6次</p>
-          <p>查看未打卡的小伙伴</p>
+          <p @click="open_pop5()">查看未打卡的小伙伴</p>
         </div>
       </div>
       <span class="head-liltle-title2">本年度迟到情况</span>
@@ -44,6 +44,61 @@
         <div class="schart-box">
           <v-chart class="schart" :options="line" autoresize />
         </div>
+      </div>
+
+      <!-- 迟到人次弹窗 -->
+      <div class="container-pop-up" v-show="isCd">
+        <img src="../assets/img/u126.png" alt />
+        <div class="container-pop-up-it" v-for="(item,index) in list" :key="index">
+          <img src="../assets/img/u128.png" alt />
+          <span class="text_1">技术部-扫地僧</span>
+          <span class="text_2">5</span>
+          <span class="text_3">次</span>
+        </div>
+      </div>
+
+      <!-- 早退人次弹窗 -->
+      <div class="container-pop-up2" v-show="isZt">
+        <img src="../assets/img/u126.png" alt />
+        <!-- <div class="container-pop-up-it2" v-for="(item,index) in list" :key="index">
+          <img src="../assets/img/u128.png" alt />
+          <span class="text_1">技术部-扫地僧</span>
+          <span class="text_2">5</span>
+          <span class="text_3">次</span>
+        </div> -->
+      </div>
+
+      <!-- 旷工人次弹窗 -->
+      <div class="container-pop-up3" v-show="isKg">
+        <img src="../assets/img/u126.png" alt />
+        <!-- <div class="container-pop-up-it3" v-for="(item,index) in list" :key="index">
+          <img src="../assets/img/u128.png" alt />
+          <span class="text_1">技术部-扫地僧</span>
+          <span class="text_2">5</span>
+          <span class="text_3">次</span>
+        </div> -->
+      </div>
+
+      <!-- 日志人次弹窗 -->
+      <div class="container-pop-up4" v-show="isRz">
+        <img src="../assets/img/u126.png" alt />
+        <!-- <div class="container-pop-up-it4" v-for="(item,index) in list" :key="index">
+          <img src="../assets/img/u128.png" alt />
+          <span class="text_1">技术部-扫地僧</span>
+          <span class="text_2">5</span>
+          <span class="text_3">次</span>
+        </div> -->
+      </div>
+
+      <!-- 打卡人次弹窗 -->
+      <div class="container-pop-up5" v-show="isDk">
+        <img src="../assets/img/u126.png" alt />
+        <!-- <div class="container-pop-up-it5" v-for="(item,index) in list" :key="index">
+          <img src="../assets/img/u128.png" alt />
+          <span class="text_1">技术部-扫地僧</span>
+          <span class="text_2">5</span>
+          <span class="text_3">次</span>
+        </div> -->
       </div>
     </div>
   </div>
@@ -60,11 +115,34 @@ export default {
   data() {
     return {
       title: "考勤数据统计",
-      line: getlineData()
+      line: getlineData(),
+      isCd: false,
+      isZt: false,
+      isKg: false,
+      isRz: false,
+      isDk: false,
+      list: [0, 1, 2, 3, 4, 5, 6, 7]
     };
   },
   components: {
     "v-chart": ECharts
+  },
+  methods: {
+    open_pop() {
+      this.isCd = !this.isCd;
+    },
+    open_pop2() {
+      this.isZt = !this.isZt;
+    },
+    open_pop3() {
+      this.isKg = !this.isKg;
+    },
+    open_pop4() {
+      this.isRz = !this.isRz;
+    },
+    open_pop5() {
+      this.isDk = !this.isDk;
+    }
   }
 };
 </script>
@@ -208,7 +286,7 @@ export default {
     font-weight: bold;
     color: #fff;
     position: relative;
-    left: 90px;
+    left: 85px;
     top: -22px;
   }
   .dk {
@@ -251,5 +329,85 @@ export default {
 .schart {
   margin: 0 auto;
   width: 100%;
+}
+
+.container-pop-up {
+  position: absolute;
+  img {
+    transform: rotate(90deg);
+    position: relative;
+    bottom: 538px;
+    left: 170px;
+  }
+  .container-pop-up-it {
+    img {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      bottom: 790px;
+      left: 230px;
+    }
+    .text_1 {
+      font-size: 14px;
+      position: relative;
+      bottom: 800px;
+      left: 240px;
+    }
+    .text_2 {
+      font-size: 14px;
+      color: #2561ef;
+      font-weight: bold;
+      padding-left: 20px;
+      position: relative;
+      bottom: 800px;
+      left: 240px;
+    }
+    .text_3 {
+      font-size: 14px;
+      position: relative;
+      bottom: 800px;
+      left: 240px;
+    }
+  }
+}
+
+.container-pop-up2 {
+  position: absolute;
+  img {
+    transform: rotate(90deg);
+    position: relative;
+    bottom: 538px;
+    left: 400px;
+  }
+}
+
+.container-pop-up3 {
+  position: absolute;
+  img {
+    transform: rotate(90deg);
+    position: relative;
+    bottom: 538px;
+    left: 640px;
+  }
+}
+
+.container-pop-up4 {
+  position: absolute;
+  img {
+    transform: rotate(90deg);
+    position: relative;
+    bottom: 538px;
+    left: 900px;
+  }
+}
+
+.container-pop-up5 {
+  position: absolute;
+  img {
+    transform: rotate(90deg);
+    position: relative;
+    bottom: 538px;
+    left: 1120px;
+  }
 }
 </style>
