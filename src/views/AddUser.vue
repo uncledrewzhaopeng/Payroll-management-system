@@ -280,12 +280,7 @@
                 transition: all .3s;
             }
 
-            .el-col-24 {
-                width: 100%;
-                display: flex;
-                margin: 40px 0px 40px 0px;
-                justify-content: flex-end;
-            }
+         
 
             .form-item-css {
                 width: 33%;
