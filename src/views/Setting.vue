@@ -20,7 +20,6 @@
       <el-table
         :data="tableData"
         style="width: 100%"
-        :row-class-name="tableRowClassName"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" v-model="checked"></el-table-column>
@@ -32,6 +31,7 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
+            <!-- :row-class-name="tableRowClassName" -->
             <el-button
               @click="handleClick(scope.row)"
               type="text"
@@ -43,16 +43,10 @@
         </el-table-column>
       </el-table>
       <el-row>
-        <el-pagination
-          v-if="total > 0"
-          @current-change="changePage"
-          :current-page="currentPage"
-          :page-size="pageSize"
-          :total="total"
-          :pager-count="5"
-          layout="total, prev, pager, next"
-          style="float:right; margin: 25px 0 0;"
-        ></el-pagination>
+        <el-pagination v-if="total > 0" @current-change="changePage" :current-page="currentPage"
+          :page-size="pageSize" :total="total" :pager-count="5" layout="total, prev, pager, next"
+            style="float:right; margin: 25px 0 0;">
+        </el-pagination>
       </el-row>
     </div>
   </div>
@@ -66,7 +60,7 @@ export default {
       input: "",
       checked:false,
       total: 100,
-      pagesize: 20,
+      pageSize: 20,
       currentPage: 1,
       tableData: [
         {
