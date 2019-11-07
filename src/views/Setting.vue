@@ -37,12 +37,7 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button
-              @click="handleClick(scope.row)"
-              type="text"
-              size="small"
-              icon="el-icon-edit-outline"
-            >编辑</el-button>
+            <el-button @click="handleClick(scope.row)" type="text" size="small" icon="el-icon-edit-outline">编辑</el-button>
             <el-button type="text" size="small" icon="el-icon-delete">删除</el-button>
           </template>
         </el-table-column>
@@ -60,12 +55,10 @@
         ></el-pagination>
       </el-row>
     </div>
-  </div>
 </template>
 
 <script>
 import { getAdmin } from "../api/basetablerequest";
-
 export default {
   data() {
     return {
@@ -145,82 +138,97 @@ export default {
 </script>
 
 <style lang="less">
- .el-table th,
- .el-table td {
-  text-align: center;
-}
-
-.el-table .cell {
-  font-size: 14px;
-}
-
-.el-table .warning-row {
-  background: #dae8fa;
-}
-
-.el-table .success-row {
-  background: white;
-}
-
-.adminitool {
-  display: flex;
-  margin: 20px 0px;
-  position: relative;
-  .admintitle {
-    font-size: 21px;
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .btn {
-    margin: 0px 30px 0px 30px;
-    border-radius: 20px;
-    color: #409eff;
-    background: #ecf5ff;
-    border-color: #b3d8ff;
-    font-size: 13px;
-    font-family: "PingFang SC Medium", "PingFang SC";
-    &:hover {
-      background: #409eff;
-      border-color: #409eff;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
+    .el-table th,
+    .el-table td {
+        text-align: center;
     }
-  }
 
-  .seek {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    color: #2a65ef;
-    font-size: 30px;
-    position: absolute;
-    right: 0px;
-  }
-
-  .el-input__inner {
-    background: #f1f5fd;
-    border-radius: 0px;
-    width: 300px;
-    border-top-style: none;
-    border-left-style: none;
-    border-right-style: none;
-    border-bottom: 1.5px solid blue;
-
-    &::-webkit-input-placeholder {
-      /* WebKit browsers */
-      color: #999;
-      font-size: 15px;
+    .el-table .cell {
+        font-size: 14px;
     }
-  }
-}
-.el-button--text {
-  font-size: 15px;
-}
 
-.el-pagination {
-    white-space: normal;
-    padding-top: 30px;
-}
+    .el-table .warning-row {
+        background: #dae8fa;
+    }
+
+    .el-table .success-row {
+        background: white;
+    }
+
+    .adminitool {
+        display: flex;
+        margin: 20px 0px;
+        position: relative;
+
+        .admintitle {
+            font-size: 21px;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .btn {
+            margin: 0px 30px 0px 30px;
+            border-radius: 20px;
+            color: #409eff;
+            background: #ecf5ff;
+            border-color: #b3d8ff;
+            font-size: 13px;
+            font-family: "PingFang SC Medium", "PingFang SC";
+
+            &:hover {
+                background: #409eff;
+                border-color: #409eff;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+
+        .seek {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            color: #2a65ef;
+            font-size: 30px;
+            position: absolute;
+            right: 0px;
+        }
+
+        .el-input__inner {
+            background: #f1f5fd;
+            border-radius: 0px;
+            width: 300px;
+            border-top-style: none;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom: 1.5px solid blue;
+
+            &::-webkit-input-placeholder {
+                /* WebKit browsers */
+                color: #999;
+                font-size: 15px;
+            }
+        }
+    }
+
+    .el-button--text {
+        font-size: 15px;
+    }
+
+    .el-button--text {
+        font-size: 15px;
+    }
+
+    .el-pagination {
+        white-space: normal;
+    }
+  
+  .el-button--text {
+    font-size: 15px;
+  }
+
+  .el-pagination {
+      white-space: normal;
+      padding-top: 30px;
+  }
 </style>

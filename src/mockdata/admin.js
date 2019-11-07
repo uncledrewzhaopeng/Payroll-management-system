@@ -27,12 +27,11 @@ export default {
         } = JSON.parse(config.body);
         let mockList = List;
         const admin = mockList.filter((item, index) => index < limit * currentpage && index >= limit * (currentpage - 1))
-        // debugger
         return {
             code: 200,
             data: {
                 total: mockList.length,
-                admin: admin
+                admin: admin,
             }
         }
     }
