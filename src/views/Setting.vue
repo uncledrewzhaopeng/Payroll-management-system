@@ -10,12 +10,22 @@
     <div class="adminitool">
       <span class="admintitle">管理员管理</span>
       <el-button icon="el-icon-lx-xinzeng1" class="btn" round @click="jump_addmin()">新增</el-button>
-      <el-button icon="el-icon-delete-solid" class="btn" round>批量删除</el-button>
+      <el-button icon="el-icon-delete-solid" class="btn" round @click="delAll()">批量删除</el-button>
+      <!-- 删除提示框 -->
+      <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
+        <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="delVisible = false">取消</el-button>
+          <el-button type="primary" @click="deleteRow()">确定</el-button>
+        </span>
+      </el-dialog>
+      <!-- 搜索输入框 -->
       <div class="seek">
         <i class="el-icon-search"></i>
         <el-input placeholder="请输入员工姓名、工号或部门" v-model="input"></el-input>
       </div>
     </div>
+    <!-- 表格 -->
     <div class="container">
       <el-table
         :row-class-name="tableRowClassName"
@@ -23,7 +33,13 @@
         style="width: 100%"
         @selection-change="handleSelectionChange"
       >
+        <el-table-column type="index" label="序号" width="60" align="center" fixed>
+          <template slot-scope="scope">
+            <span>{{scope.$index+(pageIndex - 1) * pageSize + 1}}</span>
+          </template>
+        </el-table-column>
         <el-table-column type="selection" width="55" v-model="checked"></el-table-column>
+        <el-table-column prop="id" label="ID" v-if="show"></el-table-column>
         <el-table-column prop="name" label="姓名"></el-table-column>
         <el-table-column prop="number" label="工号"></el-table-column>
         <el-table-column prop="phone" label="手机"></el-table-column>
@@ -49,11 +65,12 @@
               type="text"
               size="small"
               icon="el-icon-delete"
-              @click.native.prevent="deleteRow(scope.$index, tableData)"
+              @click.native.prevent="handleDelete(scope.$index, tableData)"
             >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
+      <!-- 分页 -->
       <el-row>
         <el-pagination
           v-if="total > 0"
@@ -71,11 +88,17 @@
 </template>
 
 <script>
+// 引入api接口
 import { getAdmin } from "../api/basetablerequest";
 export default {
+  // 挂载结束后触发函数获取数据
+  mounted() {
+    this.getAdminList();
+  },
   data() {
     return {
-      input: "",// 输入框绑定
+      show: false,
+      input: "", // 输入框绑定
       checked: false, // 默认未选中
       currentPage4: 4, //需要给分页组件传的信息
       total: 0, // 总数
@@ -84,6 +107,8 @@ export default {
       pageSizes: [5, 20, 30, 50, 100, 1000], //每页显示多少条
       layout: "total, sizes, prev, pager, next, jumper", // 翻页属性
       delVisible: false,
+      delarr: [], //存放删除的数据
+      multipleSelection: [], //多选的数据
       tableData: [] //请求到数据存放的数组
     };
   },
@@ -122,8 +147,20 @@ export default {
     jump_addmin() {
       this.$router.push("/addadmin");
     },
-    // 删除单行列表
-    deleteRow(index, rows) {
+    //批量删除
+    delAll() {
+      this.delVisible = true; //显示删除弹框
+      const length = this.multipleSelection.length;
+      for (let i = 0; i < length; i++) {
+        this.delarr.push(this.multipleSelection[i].id);
+      }
+    },
+    // 确定删除
+    deleteRow() {
+      this.delVisible = false; //未完成
+    },
+    // 删除单行
+    handleDelete(index, rows) {
       // debugger;
       rows.splice(index, 1);
       // console.log(index, 1);
@@ -162,10 +199,6 @@ export default {
           console.log(err);
         });
     }
-  },
-  // 挂载结束后触发函数获取数据
-  mounted() {
-    this.getAdminList();
   }
 };
 </script>

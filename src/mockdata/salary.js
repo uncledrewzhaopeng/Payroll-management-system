@@ -23,7 +23,7 @@ for (let i = 0; i < count; i++) {
         "real|15000-50000": 50000,
     }))
 }
-console.log("SalaryList:", List)
+// console.log("SalaryList:", List)
 
 export default {
     /**

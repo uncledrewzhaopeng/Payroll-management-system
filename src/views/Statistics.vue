@@ -11,20 +11,24 @@
       <el-row>
         <el-col :span="16">
           <div class="head-item head-title">{{title}}</div>
+          <!-- 日期选择器 -->
           <div class="head-item">
             <span>月份</span>
             <el-date-picker v-model="search_form.month" type="month" placeholder="选择月"></el-date-picker>
           </div>
+          <!-- 导出按钮 -->
           <div class="head-item">
             <el-button type="primary" icon="el-icon-download" plain round @click="exportExcel">导出</el-button>
           </div>
         </el-col>
+        <!-- 搜索输入框 -->
         <el-col :span="8" class="search-head">
           <i class="el-icon-search"></i>
           <input type="text" class="search" placeholder="搜索工号、部门、姓名" />
         </el-col>
       </el-row>
     </div>
+    <!-- 表格 -->
     <div class="container">
       <el-table :data="tableData" stripe style="width: 100%">
         <el-table-column prop="department" label="部门"></el-table-column>
@@ -47,6 +51,7 @@
           <el-button type="text" icon="el-icon-edit" size="large" @click="jump_editaddend()">编辑</el-button>
         </el-table-column>
       </el-table>
+      <!-- 分页 -->
       <el-row>
         <el-pagination
           v-if="total > 0"
@@ -64,8 +69,13 @@
 </template>
 
 <script>
+// 引入api接口
 import { getSalary } from "../api/basetablerequest";
 export default {
+  // 挂载结束后触发函数获取数据  
+  mounted() {
+    this.getSalaryList();
+  },
   data() {
     return {
       title: "工资报表",
@@ -79,13 +89,14 @@ export default {
       pageSize: 5, // 1页显示多少条
       pageSizes: [5, 20, 30, 50, 100, 1000], //每页显示多少条
       layout: "total, sizes, prev, pager, next, jumper", // 翻页属性
-      tableData: []
+      tableData: [] //请求到数据存放的数组
     };
   },
   methods: {
     changePage(val) {
       console.log(val);
     },
+    // 点击编辑跳转到编辑出勤页面
     jump_editaddend() {
       this.$router.push("/editaddend");
     },
@@ -99,12 +110,14 @@ export default {
       this.pageIndex = page;
       this.getSalaryList();
     },
-    // 获取工资报表列表、分页
+    // 获取工资报表列表
     getSalaryList() {
+      // 分页
       let pagedata = {
         limit: this.pageSize,
         currentpage: this.pageIndex
       };
+      // 请求数据
       getSalary(pagedata)
         .then(res => {
           this.loading = false;
@@ -172,10 +185,6 @@ export default {
       return jsonData.map(v => filterVal.map(j => v[j]));
     }
   },
-  
-  mounted() {
-    this.getSalaryList();
-  }
 };
 </script>
 

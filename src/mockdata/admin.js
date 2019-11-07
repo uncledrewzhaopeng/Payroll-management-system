@@ -5,13 +5,15 @@ const count = 500
 
 for (let i = 0; i < count; i++) {
     List.push(Mock.mock({
+        sortnum: i + 1,
+        id: i + 1,
         name: Mock.Random.cname(),
         number: Mock.Random.natural(600000, 1000000),
         'phone|10000000000-19999999999': 18380271137,
         "state|1": true
     }))
 }
-// console.log("dataList:", List)
+console.log("dataList:", List)
 
 export default {
     /**
