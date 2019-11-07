@@ -132,7 +132,7 @@
                 }
                 console.log(this.delarr);
             },
-            // 单行删除
+           // 单行删除
             deleteRow(index, rows) {
                 // debugger;
                 rows.splice(index, 1);
