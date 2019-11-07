@@ -30,9 +30,10 @@
         </el-table-column>
         <el-table-column prop="phone" label="手机">
         </el-table-column>
-        <el-table-column prop="state" label="状态">
-          <!-- v-model="value" -->
-          <el-switch active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+        <el-table-column  label="状态">
+          <template slot-scope="scope">
+            <el-switch disabled v-model="scope.row.state" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+          </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -68,7 +69,6 @@ import { getAdmin } from "../api/basetablerequest";
 export default {
   data() {
     return {
-      // value: true,
       input: "",
       checked: false,
       currentPage4: 4,//需要给分页组件传的信息
@@ -124,6 +124,11 @@ export default {
           let tabletotal = res.data.data.total;
           let tabledata = res.data.data.admin;
           // console.log(res.data.data.admin[0].state)
+          // tabledata.forEach(item => {
+          //   let tablestate = item.state;
+          //   console.log(item.state)
+          //   console.log(tablestate)
+          // });
           this.total = tabletotal;
           this.tableData = tabledata;
           console.log(res);
@@ -216,5 +221,6 @@ export default {
 
 .el-pagination {
     white-space: normal;
+    padding-top: 30px;
 }
 </style>
