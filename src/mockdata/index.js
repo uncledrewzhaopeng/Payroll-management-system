@@ -5,6 +5,8 @@ import attendance from './attendancelist'
 
 // 引入admin.js
 import adminAPI from './admin'
+// 引入salary.js
+import salaryAPI from './salary'
 
 
 // 设置全局延时 没有延时的话有时候会检测不到数据变化 建议保留
@@ -18,5 +20,9 @@ Mock.mock(/\/attendance\/list/, 'get', attendance.getlist)
 
 // 获取管理员列表
 Mock.mock(/\/user\/dataList\/getAdminlist/, 'get', adminAPI.getAdmin)
+
+// 获取工资报表列表
+Mock.mock(/\/user\/dataList\/getSalarylist/, 'get', salaryAPI.getSalary)
+
 
 export default Mock;

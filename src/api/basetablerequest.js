@@ -28,3 +28,21 @@ export function getAdmin(reqData) {
         data: reqData
     })
 }
+
+
+/**
+ * 获取工资报表列表
+ * 
+ * 
+ * @param {*} reqData 
+ * 
+ * 
+ */
+export function getSalary(reqData) {
+    // debugger
+    return request({
+        url:'/user/dataList/getSalarylist',
+        method: 'get',
+        data: reqData
+    })
+}

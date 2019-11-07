@@ -134,7 +134,7 @@
             },
             // 单行删除
             deleteRow(index, rows) {
-                debugger;
+                // debugger;
                 rows.splice(index, 1);
                 var type = "success";
                 this.$message({

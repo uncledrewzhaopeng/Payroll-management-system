@@ -16,7 +16,7 @@
             <el-date-picker v-model="search_form.month" type="month" placeholder="选择月"></el-date-picker>
           </div>
           <div class="head-item">
-            <el-button type="primary" icon="el-icon-download" plain round>导出</el-button>
+            <el-button type="primary" icon="el-icon-download" plain round @click="exportExcel">导出</el-button>
           </div>
         </el-col>
         <el-col :span="8" class="search-head">
@@ -50,13 +50,13 @@
       <el-row>
         <el-pagination
           v-if="total > 0"
-          @current-change="changePage"
-          :current-page="currentPage"
+          :current-page="currentPage4"
+          :page-sizes="pageSizes"
           :page-size="pageSize"
+          :layout="layout"
           :total="total"
-          :pager-count="5"
-          layout="total, prev, pager, next"
-          style="float:right; margin: 25px 0 0;"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
         ></el-pagination>
       </el-row>
     </div>
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import { getSalary } from "../api/basetablerequest";
 export default {
   data() {
     return {
@@ -72,137 +73,13 @@ export default {
         month: "",
         name: ""
       },
-      total: 100,
-      currentPage: 1,
-      pageSize: 20,
-      tableData: [
-        {
-          department: "技术部",
-          name: "扫地僧",
-          attendance: 22,
-          leave: 2,
-          actual: 20,
-          base: 7000,
-          station: 2000,
-          shouldsend: 8300,
-          performance: 800,
-          violation: 100,
-          social: 1000,
-          duty: 100,
-          overtime: 0,
-          overtimepay: 0,
-          other: 0,
-          real: 9100
-        },
-        {
-          department: "技术部",
-          name: "扫地僧",
-          attendance: 22,
-          leave: 2,
-          actual: 20,
-          base: 7000,
-          station: 2000,
-          shouldsend: 8300,
-          performance: 800,
-          violation: 100,
-          social: 1000,
-          duty: 100,
-          overtime: 0,
-          overtimepay: 0,
-          other: 0,
-          real: 9100
-        },
-        {
-          department: "技术部",
-          name: "扫地僧",
-          attendance: 22,
-          leave: 2,
-          actual: 20,
-          base: 7000,
-          station: 2000,
-          shouldsend: 8300,
-          performance: 800,
-          violation: 100,
-          social: 1000,
-          duty: 100,
-          overtime: 0,
-          overtimepay: 0,
-          other: 0,
-          real: 9100
-        },
-        {
-          department: "技术部",
-          name: "扫地僧",
-          attendance: 22,
-          leave: 2,
-          actual: 20,
-          base: 7000,
-          station: 2000,
-          shouldsend: 8300,
-          performance: 800,
-          violation: 100,
-          social: 1000,
-          duty: 100,
-          overtime: 0,
-          overtimepay: 0,
-          other: 0,
-          real: 9100
-        },
-        {
-          department: "技术部",
-          name: "扫地僧",
-          attendance: 22,
-          leave: 2,
-          actual: 20,
-          base: 7000,
-          station: 2000,
-          shouldsend: 8300,
-          performance: 800,
-          violation: 100,
-          social: 1000,
-          duty: 100,
-          overtime: 0,
-          overtimepay: 0,
-          other: 0,
-          real: 9100
-        },
-        {
-          department: "技术部",
-          name: "扫地僧",
-          attendance: 22,
-          leave: 2,
-          actual: 20,
-          base: 7000,
-          station: 2000,
-          shouldsend: 8300,
-          performance: 800,
-          violation: 100,
-          social: 1000,
-          duty: 100,
-          overtime: 0,
-          overtimepay: 0,
-          other: 0,
-          real: 9100
-        },
-        {
-          department: "技术部",
-          name: "扫地僧",
-          attendance: 22,
-          leave: 2,
-          actual: 20,
-          base: 7000,
-          station: 2000,
-          shouldsend: 8300,
-          performance: 800,
-          violation: 100,
-          social: 1000,
-          duty: 100,
-          overtime: 0,
-          overtimepay: 0,
-          other: 0,
-          real: 9100
-        }
-      ]
+      currentPage4: 4, //需要给分页组件传的信息
+      total: 0, // 总数
+      pageIndex: 1, // 当前页
+      pageSize: 5, // 1页显示多少条
+      pageSizes: [5, 20, 30, 50, 100, 1000], //每页显示多少条
+      layout: "total, sizes, prev, pager, next, jumper", // 翻页属性
+      tableData: []
     };
   },
   methods: {
@@ -210,8 +87,94 @@ export default {
       console.log(val);
     },
     jump_editaddend() {
-      this.$router.push('/editaddend');
+      this.$router.push("/editaddend");
+    },
+    // 每页多少条切换
+    handleSizeChange(pageSize) {
+      this.pageSize = pageSize;
+      this.getSalaryList();
+    },
+    // 上下分页
+    handleCurrentChange(page) {
+      this.pageIndex = page;
+      this.getSalaryList();
+    },
+    // 获取工资报表列表、分页
+    getSalaryList() {
+      let pagedata = {
+        limit: this.pageSize,
+        currentpage: this.pageIndex
+      };
+      getSalary(pagedata)
+        .then(res => {
+          this.loading = false;
+          let tabletotal = res.data.data.total;
+          let tabledata = res.data.data.salary;
+          this.total = tabletotal;
+          this.tableData = tabledata;
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    // 导出功能
+    exportExcel() {
+      require.ensure([], () => {
+        const {
+          export_json_to_excel
+        } = require("../assets/excel/Export2Excel");
+        // 设置Excel的表格第一行的标题
+        const tHeader = [
+          "部门",
+          "姓名",
+          "应出勤天数",
+          "请假天数",
+          "实际出勤天数",
+          "基本工资",
+          "岗位工资",
+          "应发工资",
+          "绩效工资",
+          "违规扣款",
+          "社保扣款",
+          "全勤奖",
+          "加班天数",
+          "加班费",
+          "其它",
+          "实发工资"
+        ];
+        // index、nickName、name是tableData里对象的属性
+        const filterVal = [
+          "department",
+          "name",
+          "attendance",
+          "leave",
+          "actual",
+          "base",
+          "station",
+          "shouldsend",
+          "performance",
+          "violation",
+          "social",
+          "duty",
+          "overtime",
+          "overtimepay",
+          "other",
+          "real"
+        ];
+        //把data里的tableData存到list
+        const list = this.tableData;
+        const data = this.formatJson(filterVal, list);
+        export_json_to_excel(tHeader, data, "工资报表");
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
     }
+  },
+  
+  mounted() {
+    this.getSalaryList();
   }
 };
 </script>
@@ -269,5 +232,11 @@ export default {
   .el-table th div {
     padding: 0;
   }
+}
+
+.el-pagination {
+  text-align: center;
+  white-space: normal;
+  padding-top: 30px;
 }
 </style>

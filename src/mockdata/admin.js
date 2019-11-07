@@ -11,7 +11,7 @@ for (let i = 0; i < count; i++) {
         "state|1": true
     }))
 }
-console.log("dataList:", List)
+// console.log("dataList:", List)
 
 export default {
     /**
