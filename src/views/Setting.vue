@@ -115,6 +115,7 @@
             // 删除单行列表
             deleteRow(index, rows) {
                 // debugger;
+                
                 rows.splice(index, 1);
                 // console.log(rows.splice(index, 1));
                 this.$message({
