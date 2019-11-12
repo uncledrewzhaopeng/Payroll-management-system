@@ -28,6 +28,10 @@
     <!-- 表格 -->
     <div class="container">
       <el-table
+        v-loading="loading"
+        element-loading-text="loading..."
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.2)"
         :row-class-name="tableRowClassName"
         :data="tableData"
         style="width: 100%"
@@ -97,6 +101,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       show: false,
       input: "", // 输入框绑定
       checked: false, // 默认未选中

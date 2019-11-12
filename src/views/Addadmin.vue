@@ -25,17 +25,17 @@
         </div>
         <div class="container_column">
           <span>工号*</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="input2" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>密码*</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="input3" placeholder></el-input>
         </div>
       </div>
       <div class="container_frame2">
         <div class="container_column2">
           <span>手机</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="input4" placeholder></el-input>
         </div>
         <div class="container_column2">
           <span class="status">状态</span>
@@ -117,6 +117,9 @@ export default {
     return {
       value: true,
       input: "",
+      input2: "",
+      input3: "",
+      input4: "",
       checked: false
     };
   }
