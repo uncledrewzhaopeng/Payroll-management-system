@@ -30,7 +30,15 @@
     </div>
     <!-- 表格 -->
     <div class="container">
-      <el-table :data="tableData" stripe style="width: 100%">
+      <el-table
+        :data="tableData"
+        stripe
+        style="width: 100%"
+        v-loading="loading"
+        element-loading-text="loading..."
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.2)"
+      >
         <el-table-column prop="department" label="部门"></el-table-column>
         <el-table-column prop="name" label="姓名"></el-table-column>
         <el-table-column prop="attendance" label="应出勤天数"></el-table-column>
@@ -72,13 +80,14 @@
 // 引入api接口
 import { getSalary } from "../api/basetablerequest";
 export default {
-  // 挂载结束后触发函数获取数据  
+  // 挂载结束后触发函数获取数据
   mounted() {
     this.getSalaryList();
   },
   data() {
     return {
       title: "工资报表",
+      loading: true,
       search_form: {
         month: "",
         name: ""
@@ -184,7 +193,7 @@ export default {
     formatJson(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => v[j]));
     }
-  },
+  }
 };
 </script>
 

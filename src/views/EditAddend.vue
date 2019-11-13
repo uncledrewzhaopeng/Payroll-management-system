@@ -21,83 +21,83 @@
           <span class="little">-2018年8月</span>
         </span>
       </div>
-      <div class="container_frame">
+        <div class="container_frame">
         <div class="container_column">
           <span>姓名*</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="name" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>部门*</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="department" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>请假天数</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="leave" placeholder></el-input>
         </div>
       </div>
       <div class="container_frame">
         <div class="container_column">
           <span>应出勤天数</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="attendance" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>实际出勤天数</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="actual" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>基本工资</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="base" placeholder></el-input>
         </div>
       </div>
       <div class="container_frame">
         <div class="container_column">
           <span>岗位工资</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="station" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>应发工资</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="shouldsend" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>绩效工资</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="performance" placeholder></el-input>
         </div>
       </div>
       <div class="container_frame">
         <div class="container_column">
           <span>违规扣款</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="violation" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>社保扣款</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="social" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>全勤奖</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="duty" placeholder></el-input>
         </div>
       </div>
       <div class="container_frame">
         <div class="container_column">
           <span>加班天数</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="overtime" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>加班费</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="overtimepay" placeholder></el-input>
         </div>
         <div class="container_column">
           <span>其它</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="other" placeholder></el-input>
         </div>
       </div>
       <div class="container_frame2">
         <div class="container_column2">
           <span>实发工资</span>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="real" placeholder></el-input>
         </div>
       </div>
-      <div class="container_save">
+      <div class="container_save"  @click="changeEvent()">
         <div class="save_text">
           <span>保存</span>
         </div>
@@ -110,7 +110,31 @@
 export default {
   data() {
     return{
-      input: ""
+      name:'',
+      department:'',
+      leave:'',
+      attendance:'',
+      actual:'',
+      base:'',
+      station:'',
+      shouldsend:'',
+      performance:'',
+      violation:'',
+      social:'',
+      duty:'',
+      overtime:'',
+      overtimepay:'',
+      other:'',
+      real:'',
+    }
+  },
+  methods:{
+    changeEvent() {
+      // debugger
+      // console.log(this.name)
+      // console.log(this.department)
+      // this.name = '';
+      // console.log(this.name+'为空')
     }
   }
 };
